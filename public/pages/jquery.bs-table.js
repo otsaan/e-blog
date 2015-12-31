@@ -9,7 +9,6 @@
 
 $(document).ready(function() {
 
-
 	// BOOTSTRAP TABLE - CUSTOM TOOLBAR
 	// =================================================================
 	// Require Bootstrap Table
@@ -43,7 +42,7 @@ $(document).ready(function() {
 // Sample format for Invoice Column.
 // =================================================================
 function invoiceFormatter(value, row) {
-	return '<a href="#" class="btn-link" > Order #' + value + '</a>';
+	return '<a href="#" class="btn-link" >'+ value + '</a>';
 }
 
 // Sample Format for User Name Column.
@@ -64,13 +63,9 @@ function dateFormatter(value, row) {
 // =================================================================
 function statusFormatter(value, row) {
 	var labelColor;
-	if (value == "Paid") {
+	if (value == "Active") {
 		labelColor = "success";
-	}else if(value == "Unpaid"){
-		labelColor = "warning";
-	}else if(value == "Shipped"){
-		labelColor = "info";
-	}else if(value == "Refunded"){
+	}else if(value == "Inactif"){
 		labelColor = "danger";
 	}
 	var icon = row.id % 2 === 0 ? 'fa-star' : 'fa-user';

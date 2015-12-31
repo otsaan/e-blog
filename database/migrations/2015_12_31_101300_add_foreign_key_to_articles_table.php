@@ -18,6 +18,9 @@ class AddForeignKeyToArticlesTable extends Migration
 
             $table->integer('blog_id')->unsigned();
             $table->foreign('blog_id')->references('id')->on('blogs');
+
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -31,6 +34,7 @@ class AddForeignKeyToArticlesTable extends Migration
         Schema::table('articles', function (Blueprint $table) {
             $table->dropForeign('articles_user_id_foreign');
             $table->dropForeign('articles_blog_id_foreign');
+            $table->dropForeign('articles_category_id_foreign');
         });
     }
 }

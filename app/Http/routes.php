@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
 Route::get('/profile', function () {
     return view('profile');
 });
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +31,15 @@ Route::get('/profile', function () {
 
 Route::group(['middleware' => ['web']], function () {
     //
+});
+
+
+Route::group(['domain' => '{username}.localhost'], function () {
+    Route::get('/', function ($username) {
+        if ($username == 'admin') {
+            return view('admin.index');
+        }
+
+        return view('index');
+    });
 });

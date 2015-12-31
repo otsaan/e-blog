@@ -20,6 +20,7 @@ class ArticlesTableSeeder extends Seeder
                 'views' => $faker->numberBetween(0,100),
                 'user_id' => $faker->numberBetween(1,10),
                 'blog_id' => $faker->numberBetween(1,10),
+                'category_id' => $faker->numberBetween(1,10),
                 'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
             ]);
         }

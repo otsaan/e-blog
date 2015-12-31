@@ -19,7 +19,7 @@ class AttachmentsTableSeeder extends Seeder
                 'mimetype' => $faker->mimeType,
                 'type' => $faker->randomElement(['Photo','Video','Document','Code']),
                 'path' => $faker->url,
-                'article_id' => $index,
+                'article_id' => $faker->numberBetween(1,10),
                 'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
             ]);
         }

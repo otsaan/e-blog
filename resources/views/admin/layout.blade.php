@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog">
+    <meta name="author" content="E-Blog">
+
+    <link rel="shortcut icon" href="{{ asset('/images/favicon_1.ico"')}}">
+
+    <title>E-Blog - @yield('title')</title>
+
+
+    <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/css/core.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/css/components.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/css/icons.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/css/pages.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/css/responsive.css')}}" rel="stylesheet" type="text/css"/>
+
+    @yield('styles')
+
+            <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="{{ asset('/js/modernizr.min.js') }}"></script>
+
+</head>
+
+
+<body class="fixed-left">
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Top Bar Start -->
+    <div class="topbar">
+
+        <!-- LOGO -->
+        <div class="topbar-left topbar-left-sm">
+            <div class="text-center">
+                <a href="/" class="logo"><span class="icon-plus icon-c-logo">E-B</span><span>BL<i
+                                class="md md-album"></i>G</span></a>
+            </div>
+        </div>
+
+        <!-- Button mobile view to collapse sidebar menu -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="">
+                    <div class="pull-left">
+                        <button class="button-menu-mobile open-left">
+                            <i class="ion-navicon"></i>
+                        </button>
+                        <span class="clearfix"></span>
+                    </div>
+
+
+                    <ul class="nav navbar-nav navbar-right pull-right">
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img
+                                        src="{{ asset('/images/users/avatar-admin.jpg')}}" alt="user-img" class="img-circle"> </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Paramètres</a></li>
+                                <li><a href="javascript:void(0)"><i class="ti-power-off m-r-5"></i> Se déconnecter</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <!-- Top Bar End -->
+
+
+    <!-- ========== Left Sidebar Start ========== -->
+
+    <div class="left side-menu side-menu-sm">
+        <div class="sidebar-inner slimscrollleft">
+            <!--- Divider -->
+            <div id="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="/" class="waves-effect"><i class="ti-home"></i> <span> Accueil </span> </a>
+                    </li>
+                    <li>
+                        <a href="/students" class="waves-effect"><i class="ti-user"></i><span> Etudiants </span></a>
+                    </li>
+                    <li>
+                        <a href="/blogs" class="waves-effect"><i class="ti-id-badge"></i><span> Blogs </span></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <!-- Left Sidebar End -->
+
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+
+            @yield('content')
+
+        </div>
+
+        <footer class="footer text-right">
+            2015 © E-Blog.
+        </footer>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Right content here -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+
+<script>
+    var resizefunc = [];
+</script>
+
+<!-- jQuery  -->
+<script src="{{ asset('/js/jquery.min.js')}}"></script>
+<script src="{{ asset('/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('/js/detect.js')}}"></script>
+<script src="{{ asset('/js/fastclick.js')}}"></script>
+<script src="{{ asset('/js/jquery.slimscroll.js')}}"></script>
+<script src="{{ asset('/js/jquery.blockUI.js')}}"></script>
+<script src="{{ asset('/js/waves.js')}}"></script>
+<script src="{{ asset('/js/wow.min.js')}}"></script>
+<script src="{{ asset('/js/jquery.nicescroll.js')}}"></script>
+<script src="{{ asset('/js/jquery.scrollTo.min.js')}}"></script>
+
+<script src="{{ asset('/js/jquery.core.js')}}"></script>
+<script src="{{ asset('/js/jquery.app.js')}}"></script>
+
+@yield('scripts')
+
+
+</body>
+</html>

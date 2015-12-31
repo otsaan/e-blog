@@ -20,4 +20,10 @@ class Article extends Model
     {
         return $this->belongsTo('App\Blog');
     }
+
+    public function category()
+    {
+        return $this->hasOne('App\Category');
+    }
+
 }
