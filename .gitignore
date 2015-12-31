@@ -7,5 +7,6 @@ Homestead.json
 
 ### PhpStorm ###
 *.iml
-.idea/
+.idea/*
+.idea
 
