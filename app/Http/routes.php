@@ -17,17 +17,37 @@ Route::get('/profile', function () {
 
 
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+Route::group(['domain' => '{username}.localhost', 'middleware' => ['web']], function () {
 
-
-Route::group(['domain' => '{username}.localhost'], function () {
     Route::get('/', function ($username) {
         if ($username == 'admin') {
             return view('admin.index');
         }
-
-        return view('index');
+        return view('blog');
     });
+
+
+    Route::group(['middleware' => 'auth'], function () {
+
+        Route::get('/dashboard', function ($username) {
+            if ($username != 'admin') {
+                return view('index');
+            }
+        });
+    });
+
+
+    Route::get('/login', function () {
+        return view('login');
+    });
+
+    Route::get('/register', function () {
+        return view('register');
+    });
+});
+
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+    Route::get('/home', 'HomeController@index');
 });

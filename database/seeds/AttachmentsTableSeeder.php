@@ -15,7 +15,7 @@ class AttachmentsTableSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1,10) as $index) {
             DB::table('attachments')->insert([
-                'name' => $faker->randomAscii,
+                'name' => $faker->word,
                 'mimetype' => $faker->mimeType,
                 'type' => $faker->randomElement(['Photo','Video','Document','Code']),
                 'path' => $faker->url,
