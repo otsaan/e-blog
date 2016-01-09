@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Blog;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class UsernameCheck
+class UsernameExists
 {
     /**
      * Handle an incoming request.
@@ -18,13 +19,13 @@ class UsernameCheck
     {
         /**
          * In {username}.localhost
-         * makes sure that the {username} belongs to the logged in user
+         * makes sure that the {username} exists
          */
         $hostname = $request->server->get('HTTP_HOST');
-        $username = explode('.', $hostname);
+        $username = explode('.', $hostname)[0];
 
-        if ($username[0] != Auth::user()->username) {
-            return redirect('/');
+        if ($username != 'admin' && Blog::where('username', '=', $username)->count() == 0) {
+            return response('Not Found.', 404);
         }
 
         return $next($request);

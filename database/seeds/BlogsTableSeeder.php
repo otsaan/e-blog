@@ -17,6 +17,7 @@ class BlogsTableSeeder extends Seeder
             DB::table('blogs')->insert([
                 'username' => $faker->userName,
                 'user_id' => $index,
+                'status' => $faker->randomElement(['active','inactive','disabled']),
                 'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
             ]);
         }

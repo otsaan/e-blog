@@ -41,6 +41,10 @@ class Kernel extends HttpKernel
 
         'usernameCheck' => [
             \App\Http\Middleware\UsernameCheck::class,
+        ],
+
+        'usernameExists' => [
+            \App\Http\Middleware\UsernameExists::class,
         ]
     ];
 

@@ -115,129 +115,15 @@
 
 
                         <tbody>
-                        <tr>
-                            <td>19</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Inactif</td>
-                        </tr>
-
-                        <tr>
-                            <td>11</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
-
-                        <tr>
-                            <td>12</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Inactif</td>
-                        </tr>
-
-                        <tr>
-                            <td>13</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Inactif</td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Inactif</td>
-                        </tr>
-
-                        <tr>
-                            <td>15</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
-
-                        <tr>
-                            <td>16</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
-
-                        <tr>
-                            <td>17</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Inactif</td>
-                        </tr>
-                        <tr>
-                            <td>18</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Inactif</td>
-                        </tr>
-
-                        <tr>
-                            <td>19</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
-
-                        <tr>
-                            <td>10</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
-
-                        <tr>
-                            <td>11</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
-
-                        <tr>
-                            <td>13</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
-
-                        <tr>
-                            <td>14</td>
-                            <td>Anwar ZIANI</td>
-                            <td><a href="http://zianwar.localhost">zianwar.localhost</a></td>
-                            <td>01/12/2015</td>
-                            <td>Active</td>
-                        </tr>
+                        @foreach($students as $student)
+                            <tr>
+                                <td>{{ $student->id }}</td>
+                                <td>{{ $student->firstName . ' ' . $student->lastName  }}</td>
+                                <td><a href="http://{{ $student->blog['username'] }}.localhost:8000">http://{{ $student->blog['username'] }}.localhost</a></td>
+                                <td>{{ $student->blog['created_at'] }}</td>
+                                <td>{{ $student->blog['status'] }}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
