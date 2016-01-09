@@ -28,16 +28,18 @@ Route::group([
 
     Route::auth();
 
-    Route::get('/404', function(){
-        return view('errors.404');
-    });
-
 });
-
 
 
 Route::group(['middleware' => 'web'], function () {
 
+    Route::get('/', 'HomeController@index');
+
+    Route::post('/register', 'HomeController@index');
+
+    Route::get('/create', function(){
+        return view('auth.register');
+    });
 });
 
 

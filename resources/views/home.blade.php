@@ -50,30 +50,16 @@
 
             <div class="navbar navbar-default" role="navigation">
                 <div class="container">
-                    @if ($authenticatedUser && $authenticatedUser->role == 'admin')
-                        <ul class="nav navbar-nav navbar-right pull-right">
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">{{ $authenticatedUser->username }} <i style="padding-left: 5px;" class="ti ti-user"></i> </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/admin"><i class="ti-bar-chart m-r-5"></i> Dashboard</a></li>
-                                    <li><a href="/logout"><i class="ti-power-off m-r-5"></i> Se déconnecter</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    @elseif($authenticatedUser)
-                        <ul class="nav navbar-nav navbar-right pull-right">
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">{{ $authenticatedUser->username }} <i style="padding-left: 5px;" class="ti ti-user"></i> </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{ route('profile', $authenticatedUser->username) }}"><i class="ti-settings m-r-5"></i> Paramètres</a></li>
-                                    <li><a href="{{ route('blog', $authenticatedUser->username) }}"><i class="ti-layout m-r-5"></i> Blog</a></li>
-                                    <li><a href="/logout"><i class="ti-power-off m-r-5"></i> Se déconnecter</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    @endif
+
+                    <ul class="nav navbar-nav navbar-right pull-right">
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><i class="ti ti-more-alt"></i> </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/create"><i class="ti-star m-r-5"></i> Créer un blog</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </div>

@@ -12,9 +12,13 @@ class BlogController extends Controller
 {
     public function index($username) {
 
-        if ($username == 'admin' && auth()->user()->role == 'admin') {
+        if ($username == 'admin' && !auth()->user()) {
             return redirect('/dashboard');
         }
+
+        if ($username == 'admin' && auth()->user()->role == 'admin') {
+            return redirect('/dashboard');
+        };
 
         if (Blog::where('username', '=', $username)->count() == 0) {
             return view('errors.404');
