@@ -34,6 +34,14 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
         ],
+
+        'admin' => [
+            \App\Http\Middleware\Admin::class,
+        ],
+
+        'usernameCheck' => [
+            \App\Http\Middleware\UsernameCheck::class,
+        ]
     ];
 
     /**

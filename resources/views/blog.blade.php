@@ -41,24 +41,7 @@
     <div class="topbar">
 
         <!-- Button mobile view to collapse sidebar menu -->
-        <div class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="">
-                    <ul class="nav navbar-nav navbar-right pull-right">
-                        <li class="dropdown">
-                            <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img
-                                        src="{{ asset('/images/users/avatar-admin.jpg')}}" alt="user-img" class="img-circle"> </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Paramètres</a></li>
-                                <li><a href="javascript:void(0)"><i class="ti-power-off m-r-5"></i> Se déconnecter</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <!--/.nav-collapse -->
-            </div>
-        </div>
+        @include('partials.navbar')
     </div>
     <!-- Top Bar End -->
 
