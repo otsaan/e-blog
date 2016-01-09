@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Blog;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -50,7 +52,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|max:255|doesntcontaindot',
+            'username' => 'required|max:255|alpha_num',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed',
         ]);
@@ -64,10 +66,17 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $user->blog()->create([
+            'username' => $data['username'],
+            'status' => 'active'
+        ]);
+
+        return $user;
     }
 }

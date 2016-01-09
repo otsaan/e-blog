@@ -14,10 +14,6 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $view->with('authenticatedUser', Auth::user());
         });
-
-        Validator::extend('doesntcontaindot', function($attribute, $value, $parameters, $validator) {
-            return !str_contains($value, '.');
-        });
     }
 
 

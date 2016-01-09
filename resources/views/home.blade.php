@@ -52,12 +52,13 @@
                 <div class="container">
 
                     <ul class="nav navbar-nav navbar-right pull-right">
-                        <li class="dropdown">
-                            <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><i class="ti ti-more-alt"></i> </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/create"><i class="ti-star m-r-5"></i> Créer un blog</a></li>
-                            </ul>
-                        </li>
+                        @if ($authenticatedUser)
+                            <li><a href="/dashboard"><i class="ti-bar-chart m-r-5"></i> Dashboard</a></li>
+                            <li><a href="/logout"><i class="ti-power-off m-r-5"></i> Se déconnecter</a></li>
+                        @else
+                            <li><a href="/login"><i class="ti-user m-r-5"></i> Se connecter</a></li>
+                            <li><a href="/register"><i class="ti-star m-r-5"></i> Créer un blog</a></li>
+                        @endif
                     </ul>
 
                 </div>

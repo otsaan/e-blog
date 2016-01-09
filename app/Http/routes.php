@@ -4,21 +4,28 @@ use App\Blog;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
+Route::group(['middleware' => 'web'], function () {
+
+    Route::get('/', 'HomeController@index');
+    Route::get('/dashboard', 'HomeController@dashboard');
+
+    Route::auth();
+});
 
 Route::group([
-    'domain' => '{username}.localhost',
-    'middleware' => ['web','usernameExists']], function () {
+    'prefix' => '{username}',
+    'middleware' => ['web']], function () {
 
     Route::get('/dashboard', [
         'as' => 'dashboard',
-        'middleware' => ['auth','usernameCheck'],
+        'middleware' => ['auth'],
         'uses'=> 'UserController@dashboard'
     ]);
 
     Route::get('/profile', [
         'as' => 'profile',
-        'middleware' => ['auth','usernameCheck'],
-        'uses'=>'UserController@index'
+        'middleware' => ['auth'],
+        'uses'=>'UserController@profile'
     ]);
 
     Route::get('/', [
@@ -26,30 +33,8 @@ Route::group([
         'uses' => 'BlogController@index'
     ]);
 
-    // Domain auth routes
-    Route::get('/login', 'Auth\AuthController@login');
-    Route::post('/login', 'Auth\AuthController@login');
-
-    Route::post('/password/email', 'Auth\PasswordController@sendResetLinkEmail');
-    Route::post('/password/reset', 'Auth\PasswordController@reset');
-    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-
-    Route::get('/logout', 'Auth\AuthController@logout');
-
 });
 
-
-Route::group(['middleware' => 'web'], function () {
-
-    Route::get('/', 'HomeController@index');
-
-    Route::get('/register', 'Auth\AuthController@showRegistrationForm');
-    Route::post('/register', 'Auth\AuthController@register');
-
-//    Route::get('/create', function(){
-//        return view('auth.register');
-//    });
-});
 
 
 Route::get('*', function() {

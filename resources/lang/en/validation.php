@@ -79,9 +79,6 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
-        'username' => [
-            'doesntcontaindot' => 'le champ username ne doit pas contenir un point',
-        ],
     ],
 
     /*
