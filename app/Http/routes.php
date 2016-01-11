@@ -8,6 +8,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'HomeController@index');
     Route::get('/dashboard', 'HomeController@dashboard');
+    Route::get('/api/article/{id}', 'ArticleController@get');
+
+    Route::post('/articles', 'ArticleController@update');
+    Route::delete('/articles/{id}', 'ArticleController@destroy');
 
     Route::auth();
 });

@@ -59,8 +59,15 @@
                                             <td>{{ $article->title }}</td>
                                             <td>{{ $article->category->name }}</td>
                                             <td><span class="label label-info">{{ $article->created_at }}</span></td>
-                                            <td><a href="#"><i class="ti-pencil"></i></a></td>
-                                            <td><a href="#"><i class="ti-close"></i></a></td>
+                                            <td><a href="#" @click="loadArticle({{ $article->id }})"><i class="ti-pencil"></i></a></td>
+                                            <td>
+                                                <form action="/articles/{{ $article->id }}" method="POST" id="my_form">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+
+                                                    <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;"><i class="ti-close"></i></a>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -79,26 +86,27 @@
             <div class="col-sm-12">
 
                 <div class="card-box">
-                    <form id="form" method="POST">
-                        <h4 class="m-b-30 m-t-0 header-title"><b>Nouvel Article</b></h4>
+                    <form id="form" method="POST" action="@{{ action }}" @submit="onSubmit">
+
+                        <input type="hidden" name="id" value="@{{ article.id }}" />
+                        <h4 class="m-b-30 m-t-0 header-title"><b>@{{ title }}</b></h4>
 
                         {!! csrf_field() !!}
 
                         <div class="form-group">
-                            <input type="text" class="form-control" name="title" placeholder="Titre">
+                            <input type="text" class="form-control" name="title" placeholder="Titre" value="@{{ article.title }}">
                         </div>
                         <input type="hidden" id="content" name="content" value="" />
                         <div class="form-group">
-                            <select class="form-control">
-                                <option>Catégorie</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <span>Catégorie</span>
+                            <select class="form-control" name="category" v-model="category">
+                                @foreach($categories as $categorie)
+                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div id="summernote"></div>
-                        <button type="submit" class="btn btn-default btn-lg">Valider</button>
+                        <button type="submit" class="btn btn-default btn-lg">@{{ submit }}</button>
                     </form>
                 </div>
             </div>
@@ -129,14 +137,11 @@
                 airMode: true
             });
 
-            $('#form').submit(function (e) {
-                e.preventDefault();
-                $('#content').val($('#summernote').summernote('code'));
-                console.dir($('#content').val());
-                $('form').unbind('submit').submit();
-            });
-
         });
 
     </script>
+
+    <script src="{{ asset('/js/vue.min.js')}}"></script>
+    <script src="{{ asset('/js/main.js')}}"></script>
+
 @endsection

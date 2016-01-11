@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -28,8 +29,11 @@ class ArticleController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(3)->get();
 
+        $categories = Category::all();
+
         return view('articles.new')->with([
-            'articles' => $articles
+            'articles' => $articles,
+            'categories' => $categories
         ]);
 
     }
@@ -42,9 +46,29 @@ class ArticleController extends Controller
             'views' => 0,
             'user_id' => auth()->user()->id,
             'blog_id' => 1,
-            'category_id' => 1,
+            'category_id' => $request['category'],
         ]);
 
         return redirect()->route('articles', auth()->user()->username);
+    }
+
+    public function update(Request $request) {
+        $article = Article::find($request['id']);
+        $article->title = $request['title'];
+        $article->content = $request['content'];
+        $article->category_id = $request['category'];
+        $article->save();
+        return redirect()->back();
+    }
+
+    public function destroy($id) {
+        $article = Article::find($id);
+        $article->delete();
+        return redirect()->back();
+    }
+
+    public function get($id)
+    {
+        return Article::find($id);
     }
 }
