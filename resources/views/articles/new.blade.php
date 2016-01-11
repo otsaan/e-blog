@@ -5,6 +5,8 @@
 
 @section('styles')
     <link href="{{ asset('/css/summernote.css')}}" rel="stylesheet" />
+    <link href="{{ asset('/css/sweetalert.css')}}" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
@@ -16,6 +18,37 @@
         <div class="row">
             <div class="col-sm-12">
                 <h4 class="page-title">Articles</h4> <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="card-box">
+                    <form id="form" method="POST" action="@{{ action }}" @submit="onSubmit">
+
+                        <input type="hidden" name="id" value="@{{ article.id }}" />
+                        <h4 class="m-b-30 m-t-0 header-title"><b>@{{ title }}</b></h4>
+
+                        {!! csrf_field() !!}
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="title" placeholder="Titre" value="@{{ article.title }}">
+                        </div>
+                        <input type="hidden" id="content" name="content" value="" />
+                        <div class="form-group">
+                            <span>Catégorie</span>
+                            <select class="form-control" name="category" v-model="category">
+                                @foreach($categories as $categorie)
+                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div id="summernote"></div>
+                        <button type="submit" class="btn btn-default btn-lg">@{{ submit }}</button>
+                        <button class="btn btn-lg" v-show="annuler" onClick="history.go(0)">Annuler</button>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -53,7 +86,7 @@
                                     </thead>
                                     <tbody>
                                     @foreach($articles as $article)
-                                        <tr>
+                                        <tr id="tr{{ $article->id }}">
                                             <td>{{ $article->id }}</td>
                                             <td>{{ $article->title }}</td>
                                             <td>{{ $article->title }}</td>
@@ -61,12 +94,7 @@
                                             <td><span class="label label-info">{{ $article->created_at }}</span></td>
                                             <td><a href="#" @click="loadArticle({{ $article->id }})"><i class="ti-pencil"></i></a></td>
                                             <td>
-                                                <form action="/articles/{{ $article->id }}" method="POST" id="my_form">
-                                                    {{ csrf_field() }}
-                                                    {{ method_field('DELETE') }}
-
-                                                    <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;"><i class="ti-close"></i></a>
-                                                </form>
+                                                <a href="#" @click="delete({{ $article->id }})"><i class="ti-close"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -76,43 +104,10 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- end col -->
-
-
-        </div>
-
-        <!-- end row -->
-        <div class="row">
-            <div class="col-sm-12">
-
-                <div class="card-box">
-                    <form id="form" method="POST" action="@{{ action }}" @submit="onSubmit">
-
-                        <input type="hidden" name="id" value="@{{ article.id }}" />
-                        <h4 class="m-b-30 m-t-0 header-title"><b>@{{ title }}</b></h4>
-
-                        {!! csrf_field() !!}
-
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="title" placeholder="Titre" value="@{{ article.title }}">
-                        </div>
-                        <input type="hidden" id="content" name="content" value="" />
-                        <div class="form-group">
-                            <span>Catégorie</span>
-                            <select class="form-control" name="category" v-model="category">
-                                @foreach($categories as $categorie)
-                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div id="summernote"></div>
-                        <button type="submit" class="btn btn-default btn-lg">@{{ submit }}</button>
-                    </form>
-                </div>
             </div>
+
         </div>
 
-        <!-- End row -->
 
 
 
@@ -143,5 +138,6 @@
 
     <script src="{{ asset('/js/vue.min.js')}}"></script>
     <script src="{{ asset('/js/main.js')}}"></script>
+    <script src="{{ asset('/js/sweetalert.min.js')}}"></script>
 
 @endsection

@@ -19,6 +19,7 @@ class BlogsTableSeeder extends Seeder
                 'username' => User::find($index)->username,
                 'user_id' => $index,
                 'status' => $faker->randomElement(['active','inactive','disabled']),
+                'views' => $faker->numberBetween(0,100),
                 'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
             ]);
         }
