@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title', 'content', 'views',
+        'user_id', 'blog_id', 'category_id',
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\User');

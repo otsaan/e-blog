@@ -4,10 +4,10 @@
         <div id="sidebar-menu">
             <ul>
                 <li>
-                    <a href="/" class="waves-effect"><i class="ti-home"></i> <span> Accueil </span> </a>
+                    <a href="/dashboard" class="waves-effect"><i class="ti-home"></i> <span> Accueil </span> </a>
                 </li>
                 <li>
-                    <a href="/articles" class="waves-effect"><i class="ti-pencil-alt"></i><span> Articles </span></a>
+                    <a href="{{route('articles', auth()->user()->username)}}" class="waves-effect"><i class="ti-pencil-alt"></i><span> Articles </span></a>
                 </li>
                 <li>
                     <a href="/documents" class="waves-effect"><i class="ti-files"></i><span> Documents </span></a>

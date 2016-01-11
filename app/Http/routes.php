@@ -33,6 +33,17 @@ Route::group([
         'uses' => 'BlogController@index'
     ]);
 
+    Route::get('/articles', [
+        'as' => 'articles',
+        'middleware' => ['auth'],
+        'uses'=>'ArticleController@index'
+    ]);
+
+    Route::post('/articles', [
+        'middleware' => ['auth'],
+        'uses'=>'ArticleController@create'
+    ]);
+
 });
 
 
