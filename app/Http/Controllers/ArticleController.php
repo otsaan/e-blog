@@ -24,7 +24,14 @@ class ArticleController extends Controller
             return view('errors.404');
         }
 
-        return view('articles.new');
+        $articles = Article::where('user_id', '=', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->take(3)->get();
+
+        return view('articles.new')->with([
+            'articles' => $articles
+        ]);
+
     }
 
     public function create(Request $request)

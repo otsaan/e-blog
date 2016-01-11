@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\Blog;
 use App\User;
 use Illuminate\Http\Request;
@@ -37,7 +38,10 @@ class UserController extends Controller
             return view('errors.404');
         }
 
+        $articles = Article::where('user_id', '=', auth()->user()->id)->get();
 
-        return view('index');
+        return view('index')->with([
+            'articles' => $articles
+        ]);
     }
  }

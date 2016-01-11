@@ -29,7 +29,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>8</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ $articles->count() }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Articles</p>
                             </div>
 
@@ -133,14 +133,15 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tutoriel Java</td>
-                                        <td>Commment créer une application Java avec la base de données...</td>
-                                        <td>Programmation</td>
-                                        <td><span class="label label-info">01/12/2015</span></td>
-
-                                    </tr>
+                                    @foreach($articles as $article)
+                                        <tr>
+                                            <td>{{ $article->id }}</td>
+                                            <td>{{ $article->title }}</td>
+                                            <td>{{ $article->title }}</td>
+                                            <td>{{ $article->category->name }}</td>
+                                            <td>{{ $article->created_at }}</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

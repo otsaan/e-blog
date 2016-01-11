@@ -48,17 +48,21 @@
                                         <th>Description</th>
                                         <th>Catégorie</th>
                                         <th>Publié</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tutoriel Java</td>
-                                        <td>Commment créer une application Java avec la base de données...</td>
-                                        <td>Programmation</td>
-                                        <td><span class="label label-info">01/12/2015</span></td>
-
-                                    </tr>
+                                    @foreach($articles as $article)
+                                        <tr>
+                                            <td>{{ $article->id }}</td>
+                                            <td>{{ $article->title }}</td>
+                                            <td>{{ $article->title }}</td>
+                                            <td>{{ $article->category->name }}</td>
+                                            <td><span class="label label-info">{{ $article->created_at }}</span></td>
+                                            <td><a href="#"><i class="ti-pencil"></i></a></td>
+                                            <td><a href="#"><i class="ti-close"></i></a></td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
