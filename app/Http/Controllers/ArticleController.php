@@ -80,7 +80,7 @@ class ArticleController extends Controller
         $article = Article::find($request['id']);
         $article->title = $request['title'];
         $article->content = $request['content'];
-        $article->descriptio = $request['descriptio'];
+        $article->description = $request['description'];
         $article->category_id = $request['category'];
         $article->save();
         return redirect()->back();
