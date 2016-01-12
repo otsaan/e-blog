@@ -48,6 +48,31 @@ Route::group([
         'uses'=>'ArticleController@create'
     ]);
 
+
+    Route::get('/messages', [
+        'as' => 'messages',
+        'middleware' => ['auth'],
+        'uses'=>'MessageController@index'
+    ]);
+
+    Route::get('/messages/sent', [
+        'as' => 'sent_messages',
+        'middleware' => ['auth'],
+        'uses'=>'MessageController@sent'
+    ]);
+
+    Route::get('/messages/new', [
+        'as' => 'new_message',
+        'middleware' => ['auth'],
+        'uses'=>'MessageController@create'
+    ]);
+
+    Route::post('/messages', [
+        'as' => 'post_message',
+        'middleware' => ['auth'],
+        'uses'=>'MessageController@store'
+    ]);
+
 });
 
 

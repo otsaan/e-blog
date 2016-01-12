@@ -10,6 +10,7 @@
 
     <title>E-Blog - @yield('title')</title>
 
+    @yield('top-styles')
 
     <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('/css/core.css')}}" rel="stylesheet" type="text/css"/>
@@ -98,6 +99,8 @@
 <script src="{{ asset('/js/wow.min.js')}}"></script>
 <script src="{{ asset('/js/jquery.nicescroll.js')}}"></script>
 <script src="{{ asset('/js/jquery.scrollTo.min.js')}}"></script>
+
+@yield('middle-scripts')
 
 <script src="{{ asset('/js/jquery.core.js')}}"></script>
 <script src="{{ asset('/js/jquery.app.js')}}"></script>
