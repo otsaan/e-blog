@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Blog;
+use App\Category;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -45,8 +46,14 @@ class UserController extends Controller
 
         $articles = Article::where('user_id', '=', auth()->user()->id)->get();
 
+        $blogViews = auth()->user()->blog->views;
+        $categoriesCount = Category::all()->count();
+
+
         return view('index')->with([
-            'articles' => $articles
+            'articles' => $articles,
+            'blogViews' => $blogViews,
+            'categoriesCount' => $categoriesCount
         ]);
     }
 

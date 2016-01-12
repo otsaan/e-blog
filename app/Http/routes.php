@@ -39,6 +39,7 @@ Route::group([
 
     Route::get('/', [
         'as' => 'blog',
+        'middleware' => ['incrementBlogViews'],
         'uses' => 'BlogController@index'
     ]);
 

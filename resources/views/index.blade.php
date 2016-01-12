@@ -18,7 +18,7 @@
 
 
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="card-box">
                     <div class="bar-widget">
                         <div class="table-box">
@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="card-box">
                     <div class="bar-widget">
                         <div class="table-box">
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="card-box">
                     <div class="bar-widget">
                         <div class="table-box">
@@ -71,26 +71,6 @@
                             <div class="table-detail">
                                 <h4 class="m-t-0 m-b-5"><b>12</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Catégories</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class="card-box">
-                    <div class="bar-widget">
-                        <div class="table-box">
-                            <div class="table-detail">
-                                <div class="iconbox bg-danger">
-                                    <i class="ti-files"></i>
-                                </div>
-                            </div>
-
-                            <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>20</b></h4>
-                                <p class="text-muted m-b-0 m-t-0">Fichiers</p>
                             </div>
 
                         </div>

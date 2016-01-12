@@ -63,14 +63,16 @@
                                         <textarea class="form-control" rows="3" name="about">{{ auth()->user()->about }}</textarea>
                                     </div>
                                 </div>
-
-
-
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="pull-right">
-                                    <div class="form-group">
-                                        <input class="btn btn-primary" type="submit" value="Enregistrer">
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-5 control-label"></label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control btn btn-primary" type="submit" value="Enregistrer">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
