@@ -33,11 +33,16 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group">
+                            <label>Titre</label>
                             <input type="text" class="form-control" name="title" placeholder="Titre" value="@{{ article.title }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" name="description" rows="3">@{{ article.description }}</textarea>
                         </div>
                         <input type="hidden" id="content" name="content" value="" />
                         <div class="form-group">
-                            <span>Catégorie</span>
+                            <label>Catégorie</label>
                             <select class="form-control" name="category" v-model="category">
                                 @foreach($categories as $categorie)
                                     <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
