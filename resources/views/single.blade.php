@@ -8,7 +8,7 @@
 
     <link rel="shortcut icon" href="{{ asset('/images/favicon_1.ico"')}}">
 
-    <title>E-Blog - {{ $user->firstName . ' ' . $user->lastName }}</title>
+    <title>E-Blog - {{ $article->title }}</title>
 
 
     <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
@@ -64,9 +64,9 @@
                     <div class="bg-picture text-center">
                         {{--<div class="bg-picture-overlay"></div>--}}
                         {{--<div class="profile-info-name">--}}
-                            {{--<img src="{{ asset('/images/users/avatar-admin.jpg') }}" class="thumb-lg img-circle img-thumbnail" alt="profile-image">--}}
-                            {{--<h4 class="m-b-5"><b>{{ $user->username }}</b></h4>--}}
-{{--                            <p class="text-muted"> {{ $user->firstName . ' ' . $user->lastName }}</p>--}}
+                        {{--<img src="{{ asset('/images/users/avatar-admin.jpg') }}" class="thumb-lg img-circle img-thumbnail" alt="profile-image">--}}
+                        {{--<h4 class="m-b-5"><b>{{ $user->username }}</b></h4>--}}
+                        {{--                            <p class="text-muted"> {{ $user->firstName . ' ' . $user->lastName }}</p>--}}
                         {{--</div>--}}
                     </div>
                 </div>
@@ -88,14 +88,14 @@
                         </div>
                         <div class="p-20">
                             {{--<div class="about-info-p">--}}
-                                {{--<strong>Nom</strong>--}}
-                                {{--<br>--}}
-                                {{--<p class="text-muted">{{ $user->firstName . ' ' . $user->lastName }}</p>--}}
+                            {{--<strong>Nom</strong>--}}
+                            {{--<br>--}}
+                            {{--<p class="text-muted">{{ $user->firstName . ' ' . $user->lastName }}</p>--}}
                             {{--</div>--}}
                             {{--<div class="about-info-p">--}}
-                                {{--<strong>Mobile</strong>--}}
-                                {{--<br>--}}
-                                {{--<p class="text-muted">{{ $user->firstName }}</p>--}}
+                            {{--<strong>Mobile</strong>--}}
+                            {{--<br>--}}
+                            {{--<p class="text-muted">{{ $user->firstName }}</p>--}}
                             {{--</div>--}}
                             <div class="about-info-p">
                                 <strong>Email</strong>
@@ -141,34 +141,29 @@
 
 
                 <div class="col-lg-8 m-t-20">
-                    @foreach($articles as $article)
-                        <div class="card-box m-b-10">
-                            <div class="table-box opport-box">
-                                {{--<div class="table-detail">--}}
-                                    {{--<img src="assets/images/brand/envato.jpg" alt="img" class="img-circle thumb-lg m-r-15" />--}}
-                                {{--</div>--}}
-                                <div>
-                                    <h1><b><a href="{{ route('article', [$user->username, $article->id]) }}">{{ $article->title }} </a></b></h1>
-                                    <p>{!! $article->content !!}</p>
-                                    <br>
-                                    <hr>
-                                    <h4>Partagez cet article avec vos amis:</h4>
+                    <div class="card-box m-b-10">
+                        <div class="table-box opport-box">
+                            {{--<div class="table-detail">--}}
+                            {{--<img src="assets/images/brand/envato.jpg" alt="img" class="img-circle thumb-lg m-r-15" />--}}
+                            {{--</div>--}}
+                            <div>
+                                <h1><b>{{ $article->title }} </b></h1>
+                                <p>{!! $article->content !!}</p>
+                                <br>
+                                <hr>
+                                <h4>Partagez cet article avec vos amis:</h4>
 
-                                    <a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
-                                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                                    <div class="fb-like" data-href="{{url()->current()}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-                                    <br>
-                                    <small><b>Catégorie: </b> <span class="text-muted"><a href="">{{ $article->category->name }}</a></span></small>
-                                </div>
-
+                                <a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                                <div class="fb-like" data-href="{{url()->current()}}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                                <br>
+                                <small><b>Catégorie: </b> <span class="text-muted"><a href="">{{ $article->category->name }}</a></span></small>
                             </div>
+
                         </div>
-                        <br>
-                    @endforeach
-
-                    {!! $articles->links() !!}
+                    </div>
+                    <br>
                 </div>
-
 
             </div>
 

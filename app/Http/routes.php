@@ -32,6 +32,11 @@ Route::group([
         'uses'=>'UserController@profile'
     ]);
 
+    Route::post('/profile', [
+        'middleware' => ['auth'],
+        'uses'=>'UserController@update'
+    ]);
+
     Route::get('/', [
         'as' => 'blog',
         'uses' => 'BlogController@index'
@@ -47,7 +52,6 @@ Route::group([
         'middleware' => ['auth'],
         'uses'=>'ArticleController@create'
     ]);
-
 
     Route::get('/messages', [
         'as' => 'messages',
@@ -89,6 +93,36 @@ Route::group([
         'as' => 'reply_message',
         'middleware' => ['auth'],
         'uses'=>'MessageController@reply'
+    ]);
+
+	Route::get('/blog', [
+        'as' => 'blog-articles',
+        'uses'=>'ArticleController@blog'
+    ]);
+
+    Route::get('/blog/{id}', [
+        'as' => 'article',
+        'uses'=>'ArticleController@show'
+    ]);
+
+    Route::get('/contact', [
+        'as' => 'contact',
+        'uses'=>'ArticleController@contact'
+    ]);
+
+    Route::post('/mail', [
+        'as' => 'mail',
+        'uses'=>'UserController@sendEmail'
+    ]);
+
+    Route::get('/blogs', [
+        'as' => 'blogs',
+        'uses'=>'BlogController@blogs'
+    ]);
+
+    Route::get('/blogs/{id}/articles', [
+        'as' => 'articles-blog',
+        'uses'=>'BlogController@articles'
     ]);
 
 });

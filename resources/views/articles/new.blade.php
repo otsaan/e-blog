@@ -33,11 +33,16 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group">
+                            <label>Titre</label>
                             <input type="text" class="form-control" name="title" placeholder="Titre" value="@{{ article.title }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" name="description" rows="3">@{{ article.description }}</textarea>
                         </div>
                         <input type="hidden" id="content" name="content" value="" />
                         <div class="form-group">
-                            <span>Catégorie</span>
+                            <label>Catégorie</label>
                             <select class="form-control" name="category" v-model="category">
                                 @foreach($categories as $categorie)
                                     <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
@@ -88,8 +93,8 @@
                                     @foreach($articles as $article)
                                         <tr id="tr{{ $article->id }}">
                                             <td>{{ $article->id }}</td>
-                                            <td>{{ $article->title }}</td>
-                                            <td>{{ $article->title }}</td>
+                                            <td><a href="{{ route('article', [auth()->user()->username, $article->id]) }}">{{ $article->title }}</a></td>
+                                            <td>{{ str_limit($article->description, 30) }}</td>
                                             <td>{{ $article->category->name }}</td>
                                             <td><span class="label label-info">{{ $article->created_at }}</span></td>
                                             <td><a href="#" @click="loadArticle({{ $article->id }})"><i class="ti-pencil"></i></a></td>

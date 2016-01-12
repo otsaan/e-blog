@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>120</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ \App\User::count() }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Etudiants</p>
                             </div>
 
@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>20</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ \App\Blog::count() }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Blogs</p>
                             </div>
 
@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>200</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ \App\Article::count() }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Articles</p>
                             </div>
 
@@ -109,7 +109,8 @@
                             <th data-field="student" data-sortable="true" data-formatter="dateFormatter">Etudiant</th>
                             <th data-field="blog-link" data-align="center" data-sortable="true" data-sorter="priceSorter">Lien Blog</th>
                             <th data-field="creation-date" data-align="center" data-sortable="true" data-formatter="dateFormatter">Date Création</th>
-                            <th data-field="active" data-align="center" data-sortable="true" data-formatter="statusFormatter">Active</th>
+                            <th data-field="articles" data-align="center" data-sortable="true" data-formatter="statusFormatter">Articles</th>
+                            <th data-field="active" data-align="center" data-sortable="true" data-formatter="statusFormatter">Statut</th>
                         </tr>
                         </thead>
 
@@ -119,9 +120,10 @@
                             <tr>
                                 <td>{{ $student->id }}</td>
                                 <td>{{ $student->firstName . ' ' . $student->lastName  }}</td>
-                                <td><a href="http://{{ $student->blog['username'] }}.localhost:8000">http://{{ $student->blog['username'] }}.localhost</a></td>
-                                <td>{{ $student->blog['created_at'] }}</td>
-                                <td>{{ $student->blog['status'] }}</td>
+                                <td><a href="{{route('blog', $student->username)}}">{{route('blog', $student->username)}}</a></td>
+                                <td>{{ $student->blog['created_at']}}</td>
+                                <td><a href="{{route('articles-blog', [auth()->user()->username, $student->blog['id']]) }}"><i class="ti-arrow-circle-right"></i></a></td>
+                                <td><mark>{{ $student->blog['status'] }}</mark></td>
                             </tr>
                         @endforeach
                         </tbody>
