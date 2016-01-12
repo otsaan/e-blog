@@ -58,4 +58,16 @@ class UserController extends Controller
 
         return redirect()->back();
     }
+
+    public function update(Request $request) {
+        $user = User::find($request['id']);
+        $user->firstName = $request['firstName'];
+        $user->about = $request['about'];
+        $user->lastName = $request['lastName'];
+        $user->facebook = $request['facebook'];
+        $user->linkedin = $request['linkedin'];
+        $user->twitter = $request['twitter'];
+        $user->save();
+        return redirect()->back();
+    }
  }

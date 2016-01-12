@@ -121,7 +121,7 @@
                                 <td>{{ $student->firstName . ' ' . $student->lastName  }}</td>
                                 <td><a href="http://{{ $student->blog['username'] }}.localhost:8000">http://{{ $student->blog['username'] }}.localhost</a></td>
                                 <td>{{ $student->blog['created_at'] }}</td>
-                                <td>{{ $student->blog['status'] }}</td>
+                                <td><mark>{{ $student->blog['status'] }}</mark></td>
                             </tr>
                         @endforeach
                         </tbody>

@@ -32,6 +32,11 @@ Route::group([
         'uses'=>'UserController@profile'
     ]);
 
+    Route::post('/profile', [
+        'middleware' => ['auth'],
+        'uses'=>'UserController@update'
+    ]);
+
     Route::get('/', [
         'as' => 'blog',
         'uses' => 'BlogController@index'
