@@ -27,8 +27,7 @@ class ArticleController extends Controller
         }
 
         $articles = Article::where('user_id', '=', auth()->user()->id)
-            ->orderBy('created_at', 'desc')
-            ->take(3)->get();
+            ->orderBy('created_at', 'desc')->get();
 
         $categories = Category::all();
 

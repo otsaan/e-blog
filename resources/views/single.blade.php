@@ -78,12 +78,13 @@
 
                     <div class="card-box m-t-20">
                         <h4 class="m-t-0 header-title"><b>Contact</b></h4>
-                        <div class="bg-picture text-center">
-                            <div class="profile-info-name">
-                                <img src="{{ asset('/images/users/avatar-admin.jpg') }}" class="thumb-lg img-circle" alt="profile-image">
-                                <h4 class="m-b-5"><b>{{ $user->username }}</b></h4>
-                                <p class="text-muted"> {{ $user->firstName . ' ' . $user->lastName }}</p>
-                            </div>
+                        <div class="p-20">
+                            {{--<div class="bg-picture text-center">--}}
+                            {{--<div class="profile-info-name">--}}
+                            <img src="{{ asset('/images/users/avatar-1.jpg') }}" class="thumb-lg img-circle" alt="profile-image">
+                            <h4 class="m-b-5"><b>{{ $user->username }}</b></h4>
+                            <p class="text-muted"> {{ $user->firstName . ' ' . $user->lastName }}</p>
+                            {{--</div>--}}
                         </div>
                         <div class="p-20">
                             {{--<div class="about-info-p">--}}

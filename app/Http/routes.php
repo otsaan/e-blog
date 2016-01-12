@@ -73,6 +73,16 @@ Route::group([
         'uses'=>'UserController@sendEmail'
     ]);
 
+    Route::get('/blogs', [
+        'as' => 'blogs',
+        'uses'=>'BlogController@blogs'
+    ]);
+
+    Route::get('/blogs/{id}/articles', [
+        'as' => 'articles-blog',
+        'uses'=>'BlogController@articles'
+    ]);
+
 });
 
 

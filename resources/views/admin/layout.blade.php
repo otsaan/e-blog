@@ -65,10 +65,10 @@
                         <a href="/" class="waves-effect"><i class="ti-home"></i> <span> Accueil </span> </a>
                     </li>
                     <li>
-                        <a href="/students" class="waves-effect"><i class="ti-user"></i><span> Etudiants </span></a>
+                        <a href="/dashboard" class="waves-effect"><i class="ti-bar-chart"></i><span> Dashboard </span></a>
                     </li>
                     <li>
-                        <a href="/blogs" class="waves-effect"><i class="ti-id-badge"></i><span> Blogs </span></a>
+                        <a href="{{route('blogs', auth()->user()->username)}}" class="waves-effect"><i class="ti-id-badge"></i><span> Blogs </span></a>
                     </li>
                 </ul>
                 <div class="clearfix"></div>

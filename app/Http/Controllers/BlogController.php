@@ -38,4 +38,31 @@ class BlogController extends Controller
             'articles' => $articles
         ]);
     }
+
+    public function blogs($username) {
+        if ($username == 'admin' && auth()->user()->role == 'admin') {
+
+            $blogs = Blog::all();
+
+            return view('admin.blogs')->with([
+                'blogs' => $blogs
+            ]);
+        }
+
+        return view('errors.404');
+    }
+
+    public function articles($username, $id) {
+        if ($username == 'admin' && auth()->user()->role == 'admin') {
+
+            $blog = Blog::find($id);
+
+
+            return view('admin.articles')->with([
+                'articles' => $blog->articles
+            ]);
+        }
+
+        return view('errors.404');
+    }
 }

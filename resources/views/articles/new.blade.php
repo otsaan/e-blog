@@ -93,8 +93,8 @@
                                     @foreach($articles as $article)
                                         <tr id="tr{{ $article->id }}">
                                             <td>{{ $article->id }}</td>
-                                            <td>{{ $article->title }}</td>
-                                            <td>{{ $article->title }}</td>
+                                            <td><a href="{{ route('article', [auth()->user()->username, $article->id]) }}">{{ $article->title }}</a></td>
+                                            <td>{{ str_limit($article->description, 30) }}</td>
                                             <td>{{ $article->category->name }}</td>
                                             <td><span class="label label-info">{{ $article->created_at }}</span></td>
                                             <td><a href="#" @click="loadArticle({{ $article->id }})"><i class="ti-pencil"></i></a></td>

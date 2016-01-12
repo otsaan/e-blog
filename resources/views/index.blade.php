@@ -136,9 +136,9 @@
                                     @foreach($articles as $article)
                                         <tr>
                                             <td>{{ $article->id }}</td>
-                                            <td>{{ $article->title }}</td>
-                                            <td>{{ $article->title }}</td>
-                                            <td>{{ $article->category->name }}</td>
+                                            <td><a href="{{ route('article', [auth()->user()->username, $article->id]) }}">{{ $article->title }}</a></td>
+                                            <td>{{ str_limit($article->description, 30) }}</td>
+                                            <td><mark>{{ $article->category->name }}</mark></td>
                                             <td>{{ $article->created_at }}</td>
                                         </tr>
                                     @endforeach
