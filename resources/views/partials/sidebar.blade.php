@@ -12,6 +12,9 @@
                 <li>
                     <a href="{{route('profile', auth()->user()->username)}}" class="waves-effect"><i class="ti-user"></i><span> Profil </span></a>
                 </li>
+                <li>
+                    <a href="{{route('messages', auth()->user()->username)}}" class="waves-effect"><i class="ti-email"></i><span> Messages </span></a>
+                </li>
             </ul>
             <div class="clearfix"></div>
         </div>
