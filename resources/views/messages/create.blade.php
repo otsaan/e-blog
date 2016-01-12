@@ -37,11 +37,12 @@
                         <div class="p-20">
                             <form role="form" method="post" action="{{ route('post_message', auth()->user()->username) }}">
                                 {!! csrf_field() !!}
+
                                 <div class="form-group">
 
-                                    <select name="emails[]" class="select2 select2-multiple" multiple="multiple" data-placeholder="À ..." multiple>
+                                    <select name="usersId[]" class="select2 select2-multiple" multiple="multiple" data-placeholder="À ..." multiple>
                                         @foreach($emails as $email)
-                                            <option value="{{ $email['email'] }}">{{ $email['name'].' ' . '<'.$email['email'].'>' }} </option>
+                                            <option value="{{ $email['id'] }}">{{ $email['name'].' ' . '<'.$email['email'].'>' }} </option>
                                         @endforeach
                                     </select>
 

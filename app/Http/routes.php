@@ -61,16 +61,34 @@ Route::group([
         'uses'=>'MessageController@sent'
     ]);
 
+    Route::get('/messages/sent/{id}', [
+        'as' => 'show_sent_messages',
+        'middleware' => ['auth'],
+        'uses'=>'MessageController@showSent'
+    ]);
+
     Route::get('/messages/new', [
         'as' => 'new_message',
         'middleware' => ['auth'],
         'uses'=>'MessageController@create'
     ]);
 
+    Route::get('/messages/{id}', [
+        'as' => 'show_message',
+        'middleware' => ['auth'],
+        'uses'=>'MessageController@show'
+    ]);
+
     Route::post('/messages', [
         'as' => 'post_message',
         'middleware' => ['auth'],
         'uses'=>'MessageController@store'
+    ]);
+
+    Route::post('/messages/{id}', [
+        'as' => 'reply_message',
+        'middleware' => ['auth'],
+        'uses'=>'MessageController@reply'
     ]);
 
 });

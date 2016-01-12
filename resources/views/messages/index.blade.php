@@ -25,7 +25,8 @@
                     <div class="table-responsive">
                         <table class="table table-hover mails m-0">
                             <tbody>
-                                @if (!$receivedMessages)
+
+                                @if ($receivedMessages == '[]')
                                     <tr class="read">
                                         <td></td>
                                         <td ><p>Aucun message</p></td>
@@ -34,7 +35,6 @@
                                         <td></td>
                                     </tr>
                                 @else
-
                                     @foreach($receivedMessages as $message)
                                         <tr class="{{ $message->read ? 'read' : 'unread' }}">
                                             <td class="mail-select" style="width: 20px">
@@ -45,11 +45,11 @@
                                             </td>
 
                                             <td>
-                                                <a href="apps-email-read.html" class="email-name">{{ $message->from->username }}</a>
+                                                <a href="{{ route('show_message', [auth()->user()->username, $message->id]) }}" class="email-name">{{ $message->from->username }}</a>
                                             </td>
 
                                             <td>
-                                                <a href="apps-email-read.html" class="email-msg">{{ str_limit($message->content, 50) }}</a>
+                                                <a href="{{ route('show_message', [auth()->user()->username, $message->id]) }}" class="email-msg">{{ str_limit($message->content, 50) }}</a>
                                             </td>
                                             <td class="text-right" style="width: 140px">
                                                 {{ $message->created_at->diffForHumans() }}
@@ -65,17 +65,7 @@
                 </div> <!-- panel body -->
             </div> <!-- panel -->
 
-            <div class="row">
-                <div class="col-xs-7">
-                    Showing 1 - 20 of 289
-                </div>
-                <div class="col-xs-5">
-                    <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default waves-effect"><i class="fa fa-chevron-left"></i></button>
-                        <button type="button" class="btn btn-default waves-effect"><i class="fa fa-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
+
 
 
 
