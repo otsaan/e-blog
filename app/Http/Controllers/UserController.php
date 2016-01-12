@@ -34,6 +34,10 @@ class UserController extends Controller
             ]);
         }
 
+        if ($username != auth()->user()->username) {
+            return view('errors.404');
+        }
+
         if (Blog::where('username', '=', $username)->count() == 0) {
             return view('errors.404');
         }
