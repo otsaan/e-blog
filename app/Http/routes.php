@@ -48,6 +48,26 @@ Route::group([
         'uses'=>'ArticleController@create'
     ]);
 
+    Route::get('/blog', [
+        'as' => 'blog-articles',
+        'uses'=>'ArticleController@blog'
+    ]);
+
+    Route::get('/blog/{id}', [
+        'as' => 'article',
+        'uses'=>'ArticleController@show'
+    ]);
+
+    Route::get('/contact', [
+        'as' => 'contact',
+        'uses'=>'ArticleController@contact'
+    ]);
+
+    Route::post('/mail', [
+        'as' => 'mail',
+        'uses'=>'UserController@sendEmail'
+    ]);
+
 });
 
 
