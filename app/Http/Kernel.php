@@ -45,7 +45,13 @@ class Kernel extends HttpKernel
 
         'usernameExists' => [
             \App\Http\Middleware\UsernameExists::class,
-        ]
+        ],
+
+        'incrementBlogViews' => [
+            \App\Http\Middleware\IncrementBlogViews::class,
+        ],
+
+
     ];
 
     /**
