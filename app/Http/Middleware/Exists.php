@@ -6,7 +6,7 @@ use App\Blog;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class UsernameExists
+class Exists
 {
     /**
      * Handle an incoming request.
@@ -17,15 +17,11 @@ class UsernameExists
      */
     public function handle($request, Closure $next)
     {
-        /**
-         * In {username}.localhost
-         * makes sure that the {username} exists
-         */
-        $hostname = $request->server->get('HTTP_HOST');
-        $username = explode('.', $hostname)[0];
+        $username = explode('/', $request->path())[0];
 
-        if ($username != 'admin' && Blog::where('username', '=', $username)->count() == 0) {
-            return response('Not Found.', 404);
+        // check that {username} exists
+        if (Blog::where('username', '=', $username)->count() == 0) {
+            return view('errors.404');
         }
 
         return $next($request);

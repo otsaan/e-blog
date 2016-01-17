@@ -7,34 +7,47 @@ use Illuminate\Support\Facades\Auth;
 Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'HomeController@index');
-    Route::get('/dashboard', 'HomeController@dashboard');
+
+    //=============== API routes ===============
+    Route::get('/api/users', 'HomeController@getUsers');
     Route::get('/api/article/{id}', 'ArticleController@get');
 
+    //=============== User routes ===============
     Route::post('/articles', 'ArticleController@update');
-    Route::get('/api/users', 'HomeController@getUsers');
     Route::delete('/articles/{id}', 'ArticleController@destroy');
 
     Route::auth();
+
+    //=============== Crazy workaround ===============
+    Route::get('/dashboard', [
+        'middleware' => ['auth'],
+        'uses'=> 'HomeController@dashboard'
+    ]);
+
 });
 
 Route::group([
     'prefix' => '{username}',
     'middleware' => ['web']], function () {
 
+
+    //=============== Main dashboard route ===============
     Route::get('/dashboard', [
         'as' => 'dashboard',
-        'middleware' => ['auth'],
+        'middleware' => ['auth','username'],
         'uses'=> 'UserController@dashboard'
     ]);
 
+
+    //=============== User routes ===============
     Route::get('/profile', [
         'as' => 'profile',
-        'middleware' => ['auth'],
+        'middleware' => ['auth','username'],
         'uses'=>'UserController@profile'
     ]);
 
     Route::post('/profile', [
-        'middleware' => ['auth'],
+        'middleware' => ['auth','username'],
         'uses'=>'UserController@update'
     ]);
 
@@ -46,79 +59,36 @@ Route::group([
 
     Route::get('/articles', [
         'as' => 'articles',
-        'middleware' => ['auth'],
+        'middleware' => ['auth','username'],
         'uses'=>'ArticleController@index'
     ]);
 
     Route::post('/articles', [
-        'middleware' => ['auth'],
+        'middleware' => ['auth','username'],
         'uses'=>'ArticleController@create'
     ]);
 
-    Route::get('/messages', [
-        'as' => 'messages',
-        'middleware' => ['auth'],
-        'uses'=>'MessageController@index'
-    ]);
-
-    Route::get('/messages/sent', [
-        'as' => 'sent_messages',
-        'middleware' => ['auth'],
-        'uses'=>'MessageController@sent'
-    ]);
-
-    Route::get('/messages/sent/{id}', [
-        'as' => 'show_sent_messages',
-        'middleware' => ['auth'],
-        'uses'=>'MessageController@showSent'
-    ]);
-
-    Route::get('/messages/new', [
-        'as' => 'new_message',
-        'middleware' => ['auth'],
-        'uses'=>'MessageController@create'
-    ]);
-
-    Route::get('/messages/{id}', [
-        'as' => 'show_message',
-        'middleware' => ['auth'],
-        'uses'=>'MessageController@show'
-    ]);
-
-    Route::post('/messages', [
-        'as' => 'post_message',
-        'middleware' => ['auth'],
-        'uses'=>'MessageController@store'
-    ]);
-
-    Route::post('/messages/{id}', [
-        'as' => 'reply_message',
-        'middleware' => ['auth'],
-        'uses'=>'MessageController@reply'
-    ]);
-
-    Route::get('/blog', [
-        'as' => 'blog-articles',
-        'uses'=>'ArticleController@blog'
-    ]);
-
-    Route::get('/blog/{id}', [
+    Route::get('/post/{id}', [
         'as' => 'article',
+        'middleware' => ['exists'],
         'uses'=>'ArticleController@show'
     ]);
 
     Route::get('/contact', [
-        'as' => 'contact',
-        'uses'=>'ArticleController@contact'
+        'as' => 'contact_me',
+        'uses'=>'BlogController@contact'
     ]);
 
-    Route::post('/mail', [
-        'as' => 'mail',
-        'uses'=>'UserController@sendEmail'
+    Route::post('/contact', [
+        'as' => 'mail_me',
+        'uses'=>'BlogController@sendEmail'
     ]);
 
+
+    //=============== Admin routes ===============
     Route::get('/blogs', [
         'as' => 'blogs',
+        'middleware' => ['auth','username','admin'],
         'uses'=>'BlogController@blogs'
     ]);
 
@@ -127,8 +97,9 @@ Route::group([
         'uses'=>'BlogController@articles'
     ]);
 
+    //=============== Messages routes ===============
+    require('messages-routes.php');
 });
-
 
 
 Route::get('*', function() {

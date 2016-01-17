@@ -39,12 +39,17 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\Admin::class,
         ],
 
-        'usernameCheck' => [
-            \App\Http\Middleware\UsernameCheck::class,
+        'exists' => [
+            \App\Http\Middleware\Exists::class,
         ],
 
-        'usernameExists' => [
-            \App\Http\Middleware\UsernameExists::class,
+        'me' => [
+            \App\Http\Middleware\Me::class,
+        ],
+
+        'username' => [
+            \App\Http\Middleware\Me::class,
+            \App\Http\Middleware\Exists::class,
         ],
 
         'incrementBlogViews' => [

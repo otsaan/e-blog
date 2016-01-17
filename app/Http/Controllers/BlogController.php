@@ -9,60 +9,59 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class BlogController extends Controller
 {
-    public function index($username) {
 
-        if ($username == 'admin' && !auth()->user()) {
-            return redirect('/dashboard');
-        }
-
-        if ($username == 'admin' && auth()->user()->role == 'admin') {
-            return redirect('/dashboard');
-        };
-
-        if (Blog::where('username', '=', $username)->count() == 0) {
-            return view('errors.404');
-        }
-
-        if ($username == 'admin' && auth()->user()->role == 'student') {
-            return view('errors.404');
-        }
+    public function index($username)
+    {
 
         $user = User::where('username','=',$username)->first();
-        $articles = Article::where('user_id','=',$user->id)->paginate(2);
+        $articles = Article::where('user_id','=',$user->id)->paginate(8);
 
-        return view('blog')->with([
+        return view('articles')->with([
             'user' => $user,
             'articles' => $articles
         ]);
     }
 
-    public function blogs($username) {
-        if ($username == 'admin' && auth()->user()->role == 'admin') {
+    public function blogs($username)
+    {
+        $blogs = Blog::all();
 
-            $blogs = Blog::all();
-
-            return view('admin.blogs')->with([
-                'blogs' => $blogs
-            ]);
-        }
-
-        return view('errors.404');
+        return view('admin.blogs')->with([
+            'blogs' => $blogs
+        ]);
     }
 
-    public function articles($username, $id) {
-        if ($username == 'admin' && auth()->user()->role == 'admin') {
+    public function articles($username, $id)
+    {
+        $blog = Blog::find($id);
 
-            $blog = Blog::find($id);
+        return view('admin.articles')->with([
+            'articles' => $blog->articles
+        ]);
+    }
 
+    public function contact($username)
+    {
+        $user = User::where('username','=',$username)->first();
 
-            return view('admin.articles')->with([
-                'articles' => $blog->articles
-            ]);
-        }
+        return view('contact')->with([
+            'user' => $user,
+        ]);
+    }
 
-        return view('errors.404');
+    public function sendEmail($username, Request $request)
+    {
+        $user = User::where('username','=',$username)->first();
+
+        Mail::raw($request->message, function ($m) use ($user, $request) {
+            $m->from($request->email, $request->name);
+            $m->to($user->email, $user->name)->subject($request->subject);
+        });
+
+        return redirect()->back();
     }
 }

@@ -28,8 +28,7 @@
                 <?php $username = Route::current()->parameters()['username']; ?>
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('blog', $username) }}">Accueil</a></li>
-                    <li><a href="{{ route('blog-articles', $username) }}">Articles</a></li>
-                    <li><a href="{{ route('contact', $username) }}">Contact</a></li>
+                    <li><a href="{{ route('contact_me', $username) }}">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right pull-right">
                     <li class="dropdown">
@@ -60,8 +59,7 @@
             <?php $username = Route::current()->parameters()['username']; ?>
             <ul class="nav navbar-nav">
                 <li><a href="{{ route('blog', $username) }}">Accueil</a></li>
-                <li><a href="{{ route('blog-articles', $username) }}">Articles</a></li>
-                <li><a href="{{ route('contact', $username) }}">Contact</a></li>
+                <li><a href="{{ route('contact_me', $username) }}">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {{--<li><a href="/login">Se Connecter</a></li>--}}

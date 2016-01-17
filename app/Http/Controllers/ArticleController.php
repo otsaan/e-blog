@@ -12,20 +12,9 @@ use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
-    public function index($username) {
 
-        if ($username == 'admin' && !auth()->user()) {
-            return redirect('/dashboard');
-        }
-
-        if ($username == 'admin' && auth()->user()->role == 'admin') {
-            return redirect('/dashboard');
-        };
-
-        if ($username == 'admin' && auth()->user()->role == 'student') {
-            return view('errors.404');
-        }
-
+    public function index($username)
+    {
         $articles = Article::where('user_id', '=', auth()->user()->id)
             ->orderBy('created_at', 'desc')->get();
 
@@ -35,29 +24,6 @@ class ArticleController extends Controller
             'articles' => $articles,
             'categories' => $categories
         ]);
-
-    }
-
-    public function blog($username) {
-
-        $user = User::where('username','=',$username)->first();
-        $articles = Article::where('user_id','=',$user->id)->paginate(8);
-
-        return view('articles')->with([
-            'user' => $user,
-            'articles' => $articles
-        ]);
-
-    }
-
-    public function contact($username) {
-
-        $user = User::where('username','=',$username)->first();
-
-        return view('contact')->with([
-            'user' => $user,
-        ]);
-
     }
 
     public function create(Request $request)
@@ -75,24 +41,29 @@ class ArticleController extends Controller
         return redirect()->route('articles', auth()->user()->username);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $article = Article::find($request['id']);
+
         $article->title = $request['title'];
         $article->content = $request['content'];
         $article->description = $request['description'];
         $article->category_id = $request['category'];
         $article->save();
+
         return redirect()->back();
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $article = Article::find($id);
         $article->delete();
+
         return redirect()->back();
     }
 
-    public function show($username, $id) {
-
+    public function show($username, $id)
+    {
         $user = User::where('username','=',$username)->first();
 
         $article = Article::find($id);
@@ -101,7 +72,6 @@ class ArticleController extends Controller
             'user' => $user,
             'article' => $article
         ]);
-
     }
 
     public function get($id)
