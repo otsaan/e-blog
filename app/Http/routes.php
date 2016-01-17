@@ -21,7 +21,7 @@ Route::group(['middleware' => 'web'], function () {
     //=============== Crazy workaround ===============
     Route::get('/dashboard', [
         'middleware' => ['auth'],
-        'HomeController@dashboard'
+        'uses'=> 'HomeController@dashboard'
     ]);
 
 });

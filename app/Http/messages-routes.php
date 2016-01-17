@@ -1,6 +1,6 @@
 <?php
-Route::get('/messages'
-    , [
+
+Route::get('/messages', [
     'as' => 'messages',
     'middleware' => ['auth','username'],
     'uses'=>'MessageController@index'
