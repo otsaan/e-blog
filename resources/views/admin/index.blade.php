@@ -116,14 +116,14 @@
 
 
                         <tbody>
-                        @foreach($students as $student)
+                        @foreach($users as $user)
                             <tr>
-                                <td>{{ $student->id }}</td>
-                                <td>{{ $student->firstName . ' ' . $student->lastName  }}</td>
-                                <td><a href="{{route('blog', $student->username)}}">{{route('blog', $student->username)}}</a></td>
-                                <td>{{ $student->blog['created_at']}}</td>
-                                <td><a href="{{route('articles-blog', [auth()->user()->username, $student->blog['id']]) }}"><i class="ti-arrow-circle-right"></i></a></td>
-                                <td><mark>{{ $student->blog['status'] }}</mark></td>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->firstName . ' ' . $user->lastName  }}</td>
+                                <td><a href="{{route('blog', $user->username)}}">{{route('blog', $user->username)}}</a></td>
+                                <td>{{ $user->blog['created_at']}}</td>
+                                <td><a href="{{route('articles-blog', [auth()->user()->username, $user->blog['id']]) }}"><i class="ti-arrow-circle-right"></i></a></td>
+                                <td><mark>{{ $user->blog['status'] }}</mark></td>
                             </tr>
                         @endforeach
                         </tbody>

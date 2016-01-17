@@ -11,6 +11,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/api/article/{id}', 'ArticleController@get');
 
     Route::post('/articles', 'ArticleController@update');
+    Route::get('/api/users', 'HomeController@getUsers');
     Route::delete('/articles/{id}', 'ArticleController@destroy');
 
     Route::auth();
