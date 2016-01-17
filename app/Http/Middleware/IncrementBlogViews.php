@@ -19,8 +19,12 @@ class IncrementBlogViews
         $username = str_replace('/', '', $request->getRequestUri());
         //dd($username);
         $blog = Blog::where('username', '=', $username)->first();
-        $blog->views++;
-        $blog->save();
+
+        if ($blog) {
+            $blog->views++;
+            $blog->save();
+        }
+
         return $next($request);
     }
 }
