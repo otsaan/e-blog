@@ -134,7 +134,7 @@
                     <div class="card-box m-t-20">
                         <h4 class="m-t-0 header-title"><b>Contactez moi</b></h4>
                         <br>
-                        <form action="mail" method="post">
+                        <form action="{{ route('mail_me') }}" method="post">
 
                             {{ csrf_field() }}
 

@@ -9,25 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return Response
-     */
+
     public function index()
     {
         return view('home');
     }
 
-    public function dashboard() {
-        if (!Auth::user()) {
-            return redirect('/');
-        }
-
+    public function dashboard()
+    {
         return redirect()->route('dashboard', auth()->user()->username);
     }
 
-    public function getUsers() {
+    public function getUsers()
+    {
         return User::where('role','user')
             ->get()
             ->map(function($u) {
