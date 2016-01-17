@@ -29,10 +29,10 @@ class UserController extends Controller
 
         if ($username == 'admin' && auth()->user()->role == 'admin') {
 
-            $students = User::with('blog')->where('role','=','student')->get();
+            $users = User::with('blog')->where('role','=','user')->get();
 
             return view('admin.index')->with([
-                'students' => $students
+                'users' => $users
             ]);
         }
 

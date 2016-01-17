@@ -18,8 +18,9 @@ class UsersTableSeeder extends Seeder
                 'firstName' => $faker->firstName,
                 'lastName' => $faker->lastName,
                 'username' => $faker->firstName,
+                'photo' => 'noavatar.jpg',
                 'email'=> $faker->email,
-                'role'=> 'student',
+                'role'=> 'user',
                 'password'=> bcrypt('password'),
                 'level' => $faker->randomElement([
                     'CP1','CP2',
