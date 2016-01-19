@@ -21,9 +21,16 @@ new Vue({
             this.annuler = true;
 
             $.getJSON('/api/article/' + id, function(article) {
+                console.log(JSON.stringify(article.tags));
                 this.article = article;
                 this.category = article.category_id;
                 $('#summernote').summernote('code', article.content);
+
+                var selectize = $select[0].selectize;
+
+                article.tags.forEach(function(tag) {
+                    selectize.addItem(tag.id);
+                })
             }.bind(this));
         },
 

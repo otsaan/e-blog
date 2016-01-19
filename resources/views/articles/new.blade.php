@@ -6,6 +6,7 @@
 @section('styles')
     <link href="{{ asset('/css/summernote.css')}}" rel="stylesheet" />
     <link href="{{ asset('/css/sweetalert.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/selectize.css')}}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
@@ -38,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <textarea class="form-control" name="description" rows="3">@{{ article.description }}</textarea>
+                            <textarea class="form-control" name="description" rows="1">@{{ article.description }}</textarea>
                         </div>
                         <input type="hidden" id="content" name="content" value="" />
                         <div class="form-group">
@@ -50,6 +51,10 @@
                             </select>
                         </div>
                         <div id="summernote"></div>
+                        <div class="form-group">
+                            <label>Tags</label>
+                            <input type="text" id="input-tags" name="tags">
+                        </div>
                         <button type="submit" class="btn btn-default btn-lg">@{{ submit }}</button>
                         <button class="btn btn-lg" v-show="annuler" onClick="history.go(0)">Annuler</button>
                     </form>
@@ -144,5 +149,18 @@
     <script src="{{ asset('/js/vue.min.js')}}"></script>
     <script src="{{ asset('/js/main.js')}}"></script>
     <script src="{{ asset('/js/sweetalert.min.js')}}"></script>
+    <script src="{{ asset('/js/selectize.js')}}"></script>
+    <script>
+        var $select = $('#input-tags').selectize({
+            valueField: 'id',
+            labelField: 'name',
+            searchField: 'name',
+            preload: true,
+            persist: true,
+            createOnBlur: true,
+            options: {!! $tags !!},
+            create: true
+        });
+    </script>
 
 @endsection
