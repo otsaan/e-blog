@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function dashboard($username)
     {
-        if ($username == 'admin' && auth()->user()->role == 'admin') {
+        if ($username == 'admin') {
             $users = User::with('blog')->where('role','=','user')->get();
 
             return view('admin.index')->with([
