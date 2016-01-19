@@ -69,6 +69,18 @@ class ArticleController extends Controller
         $article->category_id = $request['category'];
         $article->save();
 
+        $article->tags()->detach();
+        $array = explode(',', $request->tags);
+
+        foreach ($array as $tag) {
+            if(filter_var($tag, FILTER_VALIDATE_INT)) {
+                $article->tags()->attach($tag);
+            } else {
+                $newTag = Tag::create(['name' => $tag]);
+                $article->tags()->attach($newTag['id']);
+            }
+        }
+
         return redirect()->back();
     }
 
