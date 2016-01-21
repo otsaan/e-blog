@@ -4,7 +4,10 @@ use App\Blog;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
+
+
 Route::group(['middleware' => 'web'], function () {
+
 
     Route::get('/', 'HomeController@index');
 
@@ -20,8 +23,15 @@ Route::group(['middleware' => 'web'], function () {
 
     //=============== Crazy workaround ===============
     Route::get('/dashboard', [
+        'as' => 'root_dashboard',
         'middleware' => ['auth'],
         'uses'=> 'HomeController@dashboard'
+    ]);
+
+    //=============== handle registration confirmation ===============
+    Route::get('register/verify/{confirmationCode}', [
+        'as' => 'confirm',
+        'uses' => 'UserController@confirm'
     ]);
 
 });

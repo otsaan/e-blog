@@ -8,7 +8,6 @@
 
     <div class="container">
 
-        <!-- Page-Title -->
         <div class="row">
             <div class="col-sm-12">
                 <h4 class="page-title">Tableau de bord</h4>
@@ -79,7 +78,6 @@
             </div>
         </div>
 
-        <!-- end row -->
 
         <div class="row">
 
@@ -133,12 +131,24 @@
 
         </div>
 
-        <!-- end row -->
-
-
-
-
     </div> <!-- container -->
 
 
+@endsection
+
+@section('scripts')
+    <!-- Notifications -->
+    <script src="{{ asset('/plugins/notifyjs/dist/notify.min.js') }}"></script>
+    <script src="{{ asset('/plugins/notifications/notify-metro.js') }}"></script>
+    <script>
+
+        jQuery(document).ready(function(){
+
+            if ('{{ session('notif') }}' === '1') {
+                $.Notification.notify('{{ session('type') }}','{{ session('position') }}','{{ session('title') }}', '{{ session('body') }}')
+            }
+
+        });
+
+    </script>
 @endsection

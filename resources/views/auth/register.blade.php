@@ -41,6 +41,13 @@
 
             <form class="form-horizontal m-t-20" role="form" method="POST" action="{{ url('/register') }}">
 
+                @if (session('alert'))
+                    <div class="alert {{ session('class') }}">
+                        <a class="close" data-dismiss="alert" href="#">×</a>
+                        <p>{!! session('message') !!}</p>
+                    </div>
+                @endif
+
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <a class="close" data-dismiss="alert" href="#">×</a>
