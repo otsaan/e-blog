@@ -12,7 +12,7 @@ class Article extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'content', 'views',
+        'title', 'content', 'views', 'description',
         'user_id', 'blog_id', 'category_id',
     ];
 
@@ -24,6 +24,11 @@ class Article extends Model
     public function attachments()
     {
         return $this->hasMany('App\Attachment');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
     }
 
     public function blog()

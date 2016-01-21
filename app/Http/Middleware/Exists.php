@@ -20,7 +20,7 @@ class Exists
         $username = explode('/', $request->path())[0];
 
         // check that {username} exists
-        if (Blog::where('username', '=', $username)->count() == 0) {
+        if ($username != 'admin' && Blog::where('username', '=', $username)->count() == 0) {
             return view('errors.404');
         }
 
