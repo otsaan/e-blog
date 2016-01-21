@@ -123,6 +123,12 @@ Route::group([
         'uses'=>'BlogController@articles'
     ]);
 
+    Route::get('/statistics', [
+        'as' => 'statistics',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@statistics'
+    ]);
+
     //=============== Messages routes ===============
     require('messages-routes.php');
 });
