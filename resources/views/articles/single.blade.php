@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Blog">
     <meta name="author" content="E-Blog">
+    <meta name="csrf-token" id="token" content="{{ csrf_token() }}">
+
 
     <link rel="shortcut icon" href="{{ asset('/images/favicon_1.ico"')}}">
 
@@ -62,12 +64,6 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="bg-picture text-center">
-                        {{--<div class="bg-picture-overlay"></div>--}}
-                        {{--<div class="profile-info-name">--}}
-                        {{--<img src="{{ asset('/images/users/avatar-admin.jpg') }}" class="thumb-lg img-circle img-thumbnail" alt="profile-image">--}}
-                        {{--<h4 class="m-b-5"><b>{{ $user->username }}</b></h4>--}}
-                        {{--                            <p class="text-muted"> {{ $user->firstName . ' ' . $user->lastName }}</p>--}}
-                        {{--</div>--}}
                     </div>
                 </div>
                 <div class="col-sm-8"></div>
@@ -79,24 +75,11 @@
                     <div class="card-box m-t-20">
                         <h4 class="m-t-0 header-title"><b>Contact</b></h4>
                         <div class="p-20">
-                            {{--<div class="bg-picture text-center">--}}
-                            {{--<div class="profile-info-name">--}}
                             <img src="{{ asset('/images/users/avatar-1.jpg') }}" class="thumb-lg img-circle" alt="profile-image">
                             <h4 class="m-b-5"><b>{{ $user->username }}</b></h4>
                             <p class="text-muted"> {{ $user->firstName . ' ' . $user->lastName }}</p>
-                            {{--</div>--}}
                         </div>
                         <div class="p-20">
-                            {{--<div class="about-info-p">--}}
-                            {{--<strong>Nom</strong>--}}
-                            {{--<br>--}}
-                            {{--<p class="text-muted">{{ $user->firstName . ' ' . $user->lastName }}</p>--}}
-                            {{--</div>--}}
-                            {{--<div class="about-info-p">--}}
-                            {{--<strong>Mobile</strong>--}}
-                            {{--<br>--}}
-                            {{--<p class="text-muted">{{ $user->firstName }}</p>--}}
-                            {{--</div>--}}
                             <div class="about-info-p">
                                 <strong>Email</strong>
                                 <br>
@@ -143,13 +126,19 @@
                 <div class="col-lg-8 m-t-20">
                     <div class="card-box m-b-10">
                         <div class="table-box opport-box">
-                            {{--<div class="table-detail">--}}
-                            {{--<img src="assets/images/brand/envato.jpg" alt="img" class="img-circle thumb-lg m-r-15" />--}}
-                            {{--</div>--}}
                             <div>
                                 <h1><b>{{ $article->title }} </b></h1>
                                 <p>{!! $article->content !!}</p>
                                 <br>
+                                @if ($authenticatedUser)
+                                    <hr>
+                                    <h2>
+                                        <a href="#" @click="like">
+                                            <i class="fa fa-heart-o" v-show="liked" style="color: red;"></i>
+                                            <i class="fa fa-heart-o" v-show="!liked" style="color: black;"></i>
+                                        </a> @{{ likeCount }} likes
+                                    </h2>
+                                @endif
                                 <hr>
                                 <h4>Partagez cet article avec vos amis:</h4>
 
@@ -159,10 +148,10 @@
                                 <br><br>
                                 <div class="row">
                                     <b>Tags:
-                                    @for ($i = 0; $i < count($tags); $i++)
+                                        @for ($i = 0; $i < count($tags); $i++)
                                             <mark>#{{$tags[$i]->name}}</mark>@if($i != count($tags)-1), @endif
-                                    @endfor
-                                    <div class="pull-right" style="display: inline">Catégorie:  <a href="">{{ $article->category->name }}</a></div>
+                                        @endfor
+                                        <div class="pull-right" style="display: inline">Catégorie:  <a href="">{{ $article->category->name }}</a></div>
                                     </b>
                                 </div>
                             </div>
@@ -175,27 +164,52 @@
             </div>
 
         </div>
-        <!-- END wrapper -->
+    </div>
+</div>
+<script>
+    var resizefunc = [];
+</script>
 
+<!-- jQuery  -->
+<script src="{{ asset('/js/jquery.min.js')}}"></script>
+<script src="{{ asset('/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('/js/detect.js')}}"></script>
+<script src="{{ asset('/js/fastclick.js')}}"></script>
+<script src="{{ asset('/js/jquery.slimscroll.js')}}"></script>
+<script src="{{ asset('/js/jquery.blockUI.js')}}"></script>
+<script src="{{ asset('/js/waves.js')}}"></script>
+<script src="{{ asset('/js/wow.min.js')}}"></script>
+<script src="{{ asset('/js/jquery.nicescroll.js')}}"></script>
+<script src="{{ asset('/js/jquery.scrollTo.min.js')}}"></script>
+<script src="{{ asset('/js/jquery.core.js')}}"></script>
+<script src="{{ asset('/js/jquery.app.js')}}"></script>
+<script src="{{ asset('/js/vue.min.js')}}"></script>
+<script src="{{ asset('/js/vue-resource.min.js')}}"></script>
+<script>
+    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
+    new Vue({
+        el: 'body',
+        data: {
+            likeCount: {!! $article->likeCount !!},
+            liked: {!! $article->liked() !!} + ''
+        },
+    methods: {
+            like: function() {
+                if (this.liked) {
+                    this.likeCount--;
+                    this.liked = false;
+                } else {
+                    this.likeCount++;
+                    this.liked = true;
+                }
 
-        <script>
-            var resizefunc = [];
-        </script>
-
-        <!-- jQuery  -->
-        <script src="{{ asset('/js/jquery.min.js')}}"></script>
-        <script src="{{ asset('/js/bootstrap.min.js')}}"></script>
-        <script src="{{ asset('/js/detect.js')}}"></script>
-        <script src="{{ asset('/js/fastclick.js')}}"></script>
-        <script src="{{ asset('/js/jquery.slimscroll.js')}}"></script>
-        <script src="{{ asset('/js/jquery.blockUI.js')}}"></script>
-        <script src="{{ asset('/js/waves.js')}}"></script>
-        <script src="{{ asset('/js/wow.min.js')}}"></script>
-        <script src="{{ asset('/js/jquery.nicescroll.js')}}"></script>
-        <script src="{{ asset('/js/jquery.scrollTo.min.js')}}"></script>
-
-        <script src="{{ asset('/js/jquery.core.js')}}"></script>
-        <script src="{{ asset('/js/jquery.app.js')}}"></script>
+                this.$http.post('/like/'+ {!! $article->id !!}, {!! $article->id !!}).then(function(response) {
+                    console.log(response.data);
+                });
+            }
+        }
+    });
+</script>
 
 @yield('scripts')
 

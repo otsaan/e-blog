@@ -76,6 +76,7 @@ class MessageController extends Controller
                 'read' => false
             ]);
 
+
 //            Mail::raw($request->input('content'), function($message) use ($e)
 //            {
 //                $message->from('', 'e-blog');
@@ -90,6 +91,11 @@ class MessageController extends Controller
     public function show($username, $messageId)
     {
         $message = Message::with('from')->find($messageId);
+
+        if (!$message) {
+            return view('errors.404');
+        }
+
         $unreadMessagesCount = auth()->user()->receivedMessages()->where('read', false)->count();
 
         return view('messages.show')->with([
@@ -101,6 +107,11 @@ class MessageController extends Controller
     public function showSent($username, $messageId)
     {
         $message = Message::with('from')->find($messageId);
+
+        if (!$message) {
+            return view('errors.404');
+        }
+
         $unreadMessagesCount = auth()->user()->receivedMessages()->where('read', false)->count();
 
         return view('messages.showSent')->with([

@@ -45,7 +45,7 @@
                 <div class="col-sm-12">
                     <form method="post" action="{{ route('reply_message', [auth()->user()->username, $message->id] ) }}">
                         {!! csrf_field() !!}
-                        <input type="hidden" name="to_user_id" value="{{ $message->to->id }}">
+                        <input type="hidden" name="to_user_id" value="{{ $message->from->id }}">
                         <div class="form-group">
                             <textarea name="content" rows="5" class="form-control"></textarea>
                         </div>

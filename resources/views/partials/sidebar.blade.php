@@ -16,6 +16,12 @@
                     <li>
                         <a href="{{route('categories', auth()->user()->username)}}" class="waves-effect"><i class="ti-layers-alt"></i><span> Catégories </span></a>
                     </li>
+                    <li>
+                        <a href="{{route('statistics', auth()->user()->username)}}" class="waves-effect"><i class="ti-pie-chart"></i><span> Statistiques </span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('initiate', auth()->user()->username)}}" class="waves-effect"><i class="ti-server"></i><span> Initier la base de données </span></a>
+                    </li>
                 </ul>
             @else($authenticatedUser)
                 <ul>

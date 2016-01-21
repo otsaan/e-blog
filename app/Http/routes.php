@@ -4,8 +4,6 @@ use App\Blog;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-
-
 Route::group(['middleware' => 'web'], function () {
 
 
@@ -40,10 +38,16 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'UserController@confirm'
     ]);
 
+
     Route::put('/blogs/{id}/activate', [
         'middleware' => ['auth','admin'],
         'as' => 'activate',
         'uses'=>'BlogController@activate'
+    ]);
+
+    Route::post('/like/{id}', [
+        'middleware' => ['auth'],
+        'uses'=>'ArticleController@like'
     ]);
 
 });
@@ -138,6 +142,24 @@ Route::group([
     Route::get('/blogs/{id}/articles', [
         'as' => 'articles-blog',
         'uses'=>'BlogController@articles'
+    ]);
+
+    Route::get('/statistics', [
+        'as' => 'statistics',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@statistics'
+    ]);
+    
+    Route::get('/initiate', [
+        'as' => 'initiate',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@initiate'
+    ]);
+
+    Route::post('/initiate', [
+        'as' => 'import_csv',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@importCsv'
     ]);
 
     //=============== Messages routes ===============

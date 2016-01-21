@@ -111,4 +111,17 @@ class ArticleController extends Controller
     {
         return Article::with('tags')->get()->find($id);
     }
+
+    public function like(Request $request, $id)
+    {
+        $article = Article::find($id);
+
+        if (!$article->liked()) {
+
+            $article->like();
+        } else {
+
+            $article->unlike();
+        }
+    }
 }
