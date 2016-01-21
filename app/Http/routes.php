@@ -96,6 +96,22 @@ Route::group([
 
 
     //=============== Admin routes ===============
+    Route::get('/categories', [
+        'as' => 'categories',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'CategoryController@index'
+    ]);
+
+    Route::post('/categories', [
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'CategoryController@create'
+    ]);
+
+    Route::put('/categories/{id}', [
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'CategoryController@update'
+    ]);
+
     Route::get('/blogs', [
         'as' => 'blogs',
         'middleware' => ['auth','username','admin'],
@@ -105,6 +121,18 @@ Route::group([
     Route::get('/blogs/{id}/articles', [
         'as' => 'articles-blog',
         'uses'=>'BlogController@articles'
+    ]);
+
+    Route::get('/initiate', [
+        'as' => 'initiate',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@initiate'
+    ]);
+
+    Route::post('/initiate', [
+        'as' => 'import_csv',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@importCsv'
     ]);
 
     //=============== Messages routes ===============

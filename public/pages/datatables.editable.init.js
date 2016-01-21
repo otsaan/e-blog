@@ -45,8 +45,6 @@
 			this.datatable = this.$table.DataTable({
 				aoColumns: [
 					null,
-					null,
-					null,
 					{ "bSortable": false }
 				]
 			});
@@ -62,7 +60,6 @@
 			this.$table
 				.on('click', 'a.save-row', function( e ) {
 					e.preventDefault();
-
 					_self.rowSave( $(this).closest( 'tr' ) );
 				})
 				.on('click', 'a.cancel-row', function( e ) {
@@ -120,6 +117,7 @@
 		// ==========================================================================================
 		// ROW FUNCTIONS
 		// ==========================================================================================
+
 		rowAdd: function() {
 			this.$addButton.attr({ 'disabled': 'disabled' });
 
@@ -131,10 +129,9 @@
 				'<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>',
 				'<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>',
 				'<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>',
-				'<a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>'
 			].join(' ');
 
-			data = this.datatable.row.add([ '', '', '', actions ]);
+			data = this.datatable.row.add(['', actions ]);
 			$row = this.datatable.row( data[0] ).nodes().to$();
 
 			$row
@@ -173,6 +170,7 @@
 			var _self = this,
 				data;
 
+			_self.edited = true;
 			data = this.datatable.row( $row.get(0) ).data();
 
 			$row.children( 'td' ).each(function( i ) {
@@ -202,7 +200,28 @@
 				if ( $this.hasClass('actions') ) {
 					_self.rowSetActionsDefault( $row );
 					return _self.datatable.cell( this ).data();
+
 				} else {
+					if($this.data('id')){
+						$.ajax({
+							type: 'POST',
+							url: 'categories/' + $this.data('id'),
+							data: {
+								name: $this.find('input').val(),
+								_method: 'PUT',
+								_token: $('meta[name="csrf-token"]').attr('content')
+							}
+						});
+					} else {
+						$.ajax({
+							type: 'POST',
+							url: 'categories',
+							data:{
+								name: $this.find('input').val(),
+								_token: $('meta[name="csrf-token"]').attr('content')
+							}
+						});
+					}
 					return $.trim( $this.find('input').val() );
 				}
 			});
