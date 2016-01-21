@@ -128,6 +128,18 @@ Route::group([
         'uses'=>'BlogController@articles'
     ]);
 
+    Route::get('/initiate', [
+        'as' => 'initiate',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@initiate'
+    ]);
+
+    Route::post('/initiate', [
+        'as' => 'import_csv',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@importCsv'
+    ]);
+
     //=============== Messages routes ===============
     require('messages-routes.php');
 });

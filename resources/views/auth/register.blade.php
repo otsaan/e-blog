@@ -59,39 +59,42 @@
                     </div>
                 @endif
 
-                {!! csrf_field() !!}
+                @if(session('hide_fields'))
+                @else
+                    {!! csrf_field() !!}
 
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" name="username" placeholder="Username">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="" name="username" placeholder="Username">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="email" name="email" required="" placeholder="Email">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="email" name="email" required="" placeholder="Email">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="password" name="password" required="" placeholder="Mot de passe">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" name="password" required="" placeholder="Mot de passe">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <input class="form-control" type="password" name="password_confirmation" required="" placeholder="Confirmer le mot de passe">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" name="password_confirmation" required="" placeholder="Confirmer le mot de passe">
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group text-center m-t-40">
-                    <div class="col-xs-12">
-                        <button class="btn btn-primary btn-block text-uppercase waves-effect waves-light" type="submit">
-                            S'inscrire
-                        </button>
+                    <div class="form-group text-center m-t-40">
+                        <div class="col-xs-12">
+                            <button class="btn btn-primary btn-block text-uppercase waves-effect waves-light" type="submit">
+                                S'inscrire
+                            </button>
+                        </div>
                     </div>
-                </div>
+                @endif
 
             </form>
 
