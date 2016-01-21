@@ -38,7 +38,6 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'UserController@confirm'
     ]);
 
-
     Route::put('/blogs/{id}/activate', [
         'middleware' => ['auth','admin'],
         'as' => 'activate',
