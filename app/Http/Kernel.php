@@ -56,7 +56,9 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\IncrementBlogViews::class,
         ],
 
-
+        'read' => [
+            \App\Http\Middleware\Read::class,
+        ],
     ];
 
     /**
