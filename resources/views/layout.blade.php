@@ -10,6 +10,7 @@
 
     <title>E-Blog - @yield('title')</title>
 
+    @yield('top-styles')
 
     <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('/css/core.css')}}" rel="stylesheet" type="text/css"/>
@@ -54,34 +55,7 @@
 
 
     <!-- ========== Left Sidebar Start ========== -->
-
-    <div class="left side-menu side-menu-sm">
-        <div class="sidebar-inner slimscrollleft">
-            <!--- Divider -->
-            <div id="sidebar-menu">
-                <ul>
-                    <li>
-                        <a href="/" class="waves-effect"><i class="ti-home"></i> <span> Accueil </span> </a>
-                    </li>
-                    <li>
-                        <a href="/articles" class="waves-effect"><i class="ti-pencil-alt"></i><span> Articles </span></a>
-                    </li>
-                    <li>
-                        <a href="/documents" class="waves-effect"><i class="ti-files"></i><span> Documents </span></a>
-                    </li>
-                    <li>
-                        <a href="/gallery" class="waves-effect"><i class="ti-gallery"></i> <span> Gallerie </span> </a>
-                    </li>
-                    <li>
-                        <a href="/profil" class="waves-effect"><i class="ti-user"></i><span> Profil </span></a>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-
+    @include('partials.sidebar')
     <!-- Left Sidebar End -->
 
 
@@ -125,6 +99,8 @@
 <script src="{{ asset('/js/wow.min.js')}}"></script>
 <script src="{{ asset('/js/jquery.nicescroll.js')}}"></script>
 <script src="{{ asset('/js/jquery.scrollTo.min.js')}}"></script>
+
+@yield('middle-scripts')
 
 <script src="{{ asset('/js/jquery.core.js')}}"></script>
 <script src="{{ asset('/js/jquery.app.js')}}"></script>

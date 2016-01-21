@@ -12,7 +12,7 @@ class Blog extends Model
      * @var array
      */
     protected $fillable = [
-        'username', 'status',
+        'username', 'status', 'note'
     ];
 
     public function user()

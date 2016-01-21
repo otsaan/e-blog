@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('layout')
 
 
 @section('title', 'Admin')
@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>120</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ \App\User::count() }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Etudiants</p>
                             </div>
 
@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>20</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ \App\Blog::count() }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Blogs</p>
                             </div>
 
@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>200</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ \App\Article::count() }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Articles</p>
                             </div>
 
@@ -89,46 +89,13 @@
 
         <!--Basic Toolbar-->
         <!--===================================================-->
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card-box">
-                    <h4 class="m-t-0 header-title"><b>Liste des étudiants</b></h4>
-
-                    <table data-toggle="table"
-                           data-search="true"
-                           data-show-refresh="true"
-                           data-show-toggle="true"
-                           data-show-columns="true"
-                           data-sort-name="id"
-                           data-page-list="[5, 10, 20]"
-                           data-page-size="5"
-                           data-pagination="true" data-show-pagination-switch="true" class="table-bordered ">
-                        <thead>
-                        <tr>
-                            <th data-field="id" data-sortable="true" data-formatter="invoiceFormatter">#</th>
-                            <th data-field="student" data-sortable="true" data-formatter="dateFormatter">Etudiant</th>
-                            <th data-field="blog-link" data-align="center" data-sortable="true" data-sorter="priceSorter">Lien Blog</th>
-                            <th data-field="creation-date" data-align="center" data-sortable="true" data-formatter="dateFormatter">Date Création</th>
-                            <th data-field="active" data-align="center" data-sortable="true" data-formatter="statusFormatter">Active</th>
-                        </tr>
-                        </thead>
-
-
-                        <tbody>
-                        @foreach($students as $student)
-                            <tr>
-                                <td>{{ $student->id }}</td>
-                                <td>{{ $student->firstName . ' ' . $student->lastName  }}</td>
-                                <td><a href="http://{{ $student->blog['username'] }}.localhost:8000">http://{{ $student->blog['username'] }}.localhost</a></td>
-                                <td>{{ $student->blog['created_at'] }}</td>
-                                <td>{{ $student->blog['status'] }}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        {{--<div class="row">--}}
+            {{--<div class="col-sm-12">--}}
+                {{--<div class="card-box">--}}
+                    {{----}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
 
         <!-- end row -->
