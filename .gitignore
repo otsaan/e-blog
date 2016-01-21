@@ -9,5 +9,6 @@ Homestead.json
 *.iml
 .idea/*
 .idea
-*.lock
+
 storage/
+

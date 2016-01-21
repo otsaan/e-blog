@@ -76,6 +76,7 @@ class MessageController extends Controller
                 'read' => false
             ]);
 
+
 //            Mail::raw($request->input('content'), function($message) use ($e)
 //            {
 //                $message->from('', 'e-blog');
