@@ -4,8 +4,6 @@ use App\Blog;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-
-
 Route::group(['middleware' => 'web'], function () {
 
 
@@ -127,6 +125,18 @@ Route::group([
         'as' => 'statistics',
         'middleware' => ['auth','username','admin'],
         'uses'=>'AdminController@statistics'
+    ]);
+    
+    Route::get('/initiate', [
+        'as' => 'initiate',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@initiate'
+    ]);
+
+    Route::post('/initiate', [
+        'as' => 'import_csv',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@importCsv'
     ]);
 
     //=============== Messages routes ===============
