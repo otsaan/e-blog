@@ -100,7 +100,7 @@ class ArticleController extends Controller
 
         $tags = $article->tags;
 
-        return view('single')->with([
+        return view('articles.single')->with([
             'user' => $user,
             'article' => $article,
             'tags' => $tags

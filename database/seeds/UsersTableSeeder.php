@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
                 'photo' => 'noavatar.jpg',
                 'email'=> $faker->email,
                 'role'=> 'user',
+                'confirmed'=> 1,
                 'password'=> bcrypt('password'),
                 'level' => $faker->randomElement([
                     'CP1','CP2',
@@ -43,6 +44,7 @@ class UsersTableSeeder extends Seeder
             'firstName' => $faker->firstName,
             'lastName' => $faker->lastName,
             'username' => 'admin',
+            'confirmed'=> 1,
             'email'=> $faker->email,
             'role'=> 'admin',
             'password'=> bcrypt('admin'),

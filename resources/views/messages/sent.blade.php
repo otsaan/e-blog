@@ -36,7 +36,7 @@
                             @else
 
                                 @foreach($sentMessages as $message)
-                                    <tr class="{{ $message->read ? 'read' : 'unread' }}">
+                                    <tr class="read">
                                         <td class="mail-select" style="width: 20px">
                                             <div class="checkbox checkbox-primary m-r-15">
                                                 <input id="checkbox1" type="checkbox">

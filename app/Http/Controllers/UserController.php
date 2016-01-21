@@ -10,15 +10,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-
-    public function profile() {
-        return view('profile');
-    }
-
+    /**
+     * Redirect to dashboard (user & admin)
+     * @param $username
+     * @return $this
+     */
     public function dashboard($username)
     {
         if ($username == 'admin') {
@@ -34,13 +35,18 @@ class UserController extends Controller
         $blogViews = auth()->user()->blog->views;
         $categoriesCount = Category::all()->count();
 
-        return view('index')->with([
+        return view('user.index')->with([
             'articles' => $articles,
             'blogViews' => $blogViews,
             'categoriesCount' => $categoriesCount
         ]);
     }
 
+    /**
+     * Update user
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request)
     {
         $user = User::find($request['id']);
@@ -55,5 +61,62 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back();
+    }
+
+    /**
+     * User registration : Handle confirmation code
+     * @param $confirmationCode
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function confirm($confirmationCode)
+    {
+        if(!$confirmationCode) {
+            return redirect('/register')
+                ->with([
+                    'alert' => true,
+                    'class' => 'alert-danger',
+                    'message' =>  'Code de confirmation invalid.'
+                ]);
+        }
+
+        $user = User::where('confirmation_code', $confirmationCode)->first();
+
+        if (!$user) {
+            return redirect('/register')
+                ->with([
+                    'alert' => true,
+                    'class' => 'alert-danger',
+                    'message' => 'Aucun utilisateur avec ce code de confirmation.'
+                ]);
+        }
+
+        $user->confirmed = 1;
+        $user->confirmation_code = null;
+
+        $user->save();
+
+        $user->blog()->create([
+            'username' => $user->username,
+            'status' => 'active'
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('dashboard', Auth::user()->username)
+            ->with([
+                'notif' => true,
+                'type' => 'success',
+                'position' => 'top right',
+                'title' => 'Compte validé',
+                'body' => 'Vous pouvez désormais utiliser votre compte normalement.'
+            ]);
+    }
+
+    /**
+     * User profile
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function profile() {
+        return view('user.profile');
     }
  }
