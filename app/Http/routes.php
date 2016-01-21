@@ -34,6 +34,11 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'UserController@confirm'
     ]);
 
+    Route::post('/like/{id}', [
+        'middleware' => ['auth'],
+        'uses'=>'ArticleController@like'
+    ]);
+
 });
 
 Route::group([
