@@ -4,8 +4,6 @@ use App\Blog;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-
-
 Route::group(['middleware' => 'web'], function () {
 
 
@@ -123,6 +121,12 @@ Route::group([
         'uses'=>'BlogController@articles'
     ]);
 
+    Route::get('/statistics', [
+        'as' => 'statistics',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'AdminController@statistics'
+    ]);
+    
     Route::get('/initiate', [
         'as' => 'initiate',
         'middleware' => ['auth','username','admin'],
