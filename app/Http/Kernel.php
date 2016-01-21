@@ -56,11 +56,14 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\IncrementBlogViews::class,
         ],
 
+        'active' => [
+            \App\Http\Middleware\Active::class,
+        ],
+
         'read' => [
             \App\Http\Middleware\Read::class,
         ],
     ];
-
     /**
      * The application's route middleware.
      *

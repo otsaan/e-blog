@@ -9,6 +9,12 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'HomeController@index');
 
+
+    Route::get('/404', [
+        'as' => '404',
+        'uses' => 'HomeController@notFound'
+    ]);
+
     //=============== API routes ===============
     Route::get('/api/users', 'HomeController@getUsers');
     Route::get('/api/article/{id}', 'ArticleController@get');
@@ -30,6 +36,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('register/verify/{confirmationCode}', [
         'as' => 'confirm',
         'uses' => 'UserController@confirm'
+    ]);
+
+    Route::put('/blogs/{id}/activate', [
+        'middleware' => ['auth','admin'],
+        'as' => 'activate',
+        'uses'=>'BlogController@activate'
     ]);
 
     Route::post('/like/{id}', [
@@ -66,8 +78,13 @@ Route::group([
 
     Route::get('/', [
         'as' => 'blog',
-        'middleware' => ['incrementBlogViews'],
+        'middleware' => ['exists','active','incrementBlogViews'],
         'uses' => 'BlogController@index'
+    ]);
+
+    Route::get('/disabled', [
+        'as' => 'disabled',
+        'uses' => 'HomeController@disabled'
     ]);
 
     Route::get('/articles', [

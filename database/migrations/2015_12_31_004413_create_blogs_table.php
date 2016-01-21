@@ -17,6 +17,7 @@ class CreateBlogsTable extends Migration
             $table->string('username')->unique();
             $table->string('status');
             $table->integer('views');
+            $table->text('note');
             $table->timestamps();
         });
     }

@@ -64,4 +64,18 @@ class BlogController extends Controller
 
         return redirect()->back();
     }
+
+    public function activate(Request $request, $id) {
+        $blog = Blog::find($id);
+
+        if($blog->status == 'active') {
+            $blog->status = 'disabled';
+            $blog->note = $request['note'];
+        } else {
+            $blog->status = 'active';
+        }
+        $blog->save();
+
+        return redirect()->back();
+    }
 }

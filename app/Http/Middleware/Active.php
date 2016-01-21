@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use App\Blog;
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class Exists
+class Active
 {
     /**
      * Handle an incoming request.
@@ -18,9 +17,13 @@ class Exists
     public function handle($request, Closure $next)
     {
         $username = explode('/', $request->path())[0];
-        // check that {username} exists
-        if ($username != 'admin' && Blog::where('username', '=', $username)->count() == 0) {
-            return redirect()->route('404');
+
+        $blog = Blog::where('username', '=', $username)->first();
+
+        if ($blog && $blog->status != 'active') {
+            return redirect()->route('disabled', $username)->with([
+                'blog' => $blog
+            ]);
         }
 
         return $next($request);

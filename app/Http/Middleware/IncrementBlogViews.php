@@ -17,7 +17,7 @@ class IncrementBlogViews
     public function handle($request, Closure $next)
     {
         $username = str_replace('/', '', $request->getRequestUri());
-        //dd($username);
+
         $blog = Blog::where('username', '=', $username)->first();
 
         if ($blog) {
