@@ -100,17 +100,19 @@ Route::group([
 
     Route::get('/post/{id}', [
         'as' => 'article',
-        'middleware' => ['exists'],
+        'middleware' => ['exists','active'],
         'uses'=>'ArticleController@show'
     ]);
 
     Route::get('/contact', [
         'as' => 'contact_me',
+        'middleware' => ['exists','active'],
         'uses'=>'BlogController@contact'
     ]);
 
     Route::post('/contact', [
         'as' => 'mail_me',
+        'middleware' => ['exists'],
         'uses'=>'BlogController@sendEmail'
     ]);
 
