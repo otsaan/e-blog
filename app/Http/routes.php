@@ -96,6 +96,22 @@ Route::group([
 
 
     //=============== Admin routes ===============
+    Route::get('/categories', [
+        'as' => 'categories',
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'CategoryController@index'
+    ]);
+
+    Route::post('/categories', [
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'CategoryController@create'
+    ]);
+
+    Route::put('/categories/{id}', [
+        'middleware' => ['auth','username','admin'],
+        'uses'=>'CategoryController@update'
+    ]);
+
     Route::get('/blogs', [
         'as' => 'blogs',
         'middleware' => ['auth','username','admin'],

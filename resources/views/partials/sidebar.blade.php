@@ -13,6 +13,9 @@
                     <li>
                         <a href="{{route('messages', auth()->user()->username)}}" class="waves-effect"><i class="ti-email"></i><span> Messages </span></a>
                     </li>
+                    <li>
+                        <a href="{{route('categories', auth()->user()->username)}}" class="waves-effect"><i class="ti-layers-alt"></i><span> Catégories </span></a>
+                    </li>
                 </ul>
             @else($authenticatedUser)
                 <ul>
