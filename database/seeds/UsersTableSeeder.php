@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
                 'username' => $faker->firstName,
                 'photo' => 'noavatar.jpg',
                 'email'=> $faker->email,
-                'cne'=> strtoupper($faker->word),
+                'cne'=> strtoupper(str_random(10). $index),
                 'role'=> 'user',
                 'confirmed'=> 1,
                 'password'=> bcrypt('password'),
@@ -50,6 +50,18 @@ class UsersTableSeeder extends Seeder
             'email'=> $faker->email,
             'role'=> 'admin',
             'password'=> bcrypt('admin'),
+            'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
+        ]);
+
+        DB::table('users')->insert([
+            'firstName' => 'simo',
+            'lastName' => 'l3aniba',
+            'username' => 'simo',
+            'confirmed'=> 1,
+            'cne'=> 'ANASIMO',
+            'email'=> 'simo@simo.com',
+            'role'=> 'user',
+            'password'=> bcrypt('password'),
             'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
         ]);
     }
