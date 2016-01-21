@@ -8,6 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "fzaninotto/faker": "^1.5",
+        "rtconner/laravel-likeable": "~1.1.0",
         "mnshankar/CSV": "1.8"
     },
     "require-dev": {

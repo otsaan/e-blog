@@ -2,10 +2,12 @@
 
 namespace App;
 
+use Conner\Likeable\LikeableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+    use LikeableTrait;
     /**
      * The attributes that are mass assignable.
      *
