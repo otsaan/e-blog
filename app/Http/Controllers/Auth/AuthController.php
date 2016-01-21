@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Blog;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -13,17 +14,6 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
@@ -66,18 +56,19 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $confirmationCode = str_random(30);
+
         $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role' => 'user',
+            'confirmation_code' => $confirmationCode
         ]);
 
-        $user->blog()->create([
-            'username' => $data['username'],
-            'status' => 'active'
-        ]);
-
-        return $user;
+        Mail::send('email.verify', ['confirmationCode'=> $confirmationCode], function($message) use ($data) {
+            $message->to($data['email'], $data['username'])
+                ->subject('Confirmation de compte');
+        });
     }
 }
