@@ -15,6 +15,16 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function notFound()
+    {
+        return view('errors.404');
+    }
+
+    public function disabled()
+    {
+        return view('errors.disabled');
+    }
+
     public function dashboard()
     {
         return redirect()->route('dashboard', auth()->user()->username);
