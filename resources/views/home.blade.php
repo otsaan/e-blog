@@ -92,319 +92,30 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-6 col-lg-4">
-                <div class="card-box">
-                    <div class="contact-card">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="{{ asset('/images/users/avatar-2.jpg') }}" alt="">
-                        </a>
-                        <div class="member-info">
-                            <h4 class="m-t-0 m-b-5 header-title"><b>Bill Bertz</b></h4>
-                            <p class="text-muted">Branch manager</p>
-                            <p class="text-dark"><i class="md md-business m-r-10"></i><small>ABC company Pvt Ltd.</small></p>
-                            <div class="contact-action">
-                                <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
+            <div v-for="user in users">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="card-box">
+                        <div class="contact-card">
+                            <a class="pull-left" href="#">
+                                <img class="img-circle" src="@{{ user.photo }}" alt="">
+                            </a>
+                            <div class="member-info">
+                                <h4 class="m-t-0 m-b-5 header-title"><b>@{{ user.fullName }}</b></h4>
+                                <p class="text-muted"><a href="@{{ user.blogUrl }}">@{{ user.blogUrl }}</a></p>
+                                <p class="text-dark"><i class="ti-user m-r-10"></i><small>@{{ user.about }}</small></p>
                             </div>
+                            <ul class="social-links list-inline m-0">
+                                <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                                <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Message"><i class="fa fa-envelope-o"></i></a></li>
+                            </ul>
                         </div>
-
-                        <ul class="social-links list-inline m-0">
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Message"><i class="fa fa-envelope-o"></i></a>
-                            </li>
-                        </ul>
                     </div>
-                </div>
 
-            </div> <!-- end col -->
-
-
-
-            <div class="col-sm-6 col-lg-4">
-                <div class="card-box">
-                    <div class="contact-card">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="{{ asset('/images/users/avatar-3.jpg') }}" alt="">
-                        </a>
-                        <div class="member-info">
-                            <h4 class="m-t-0 m-b-5 header-title"><b>Bill Bertz</b></h4>
-                            <p class="text-muted">Branch manager</p>
-                            <p class="text-dark"><i class="md md-business m-r-10"></i><small>ABC company Pvt Ltd.</small></p>
-                            <div class="contact-action">
-                                <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
-                            </div>
-                        </div>
-
-                        <ul class="social-links list-inline m-0">
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Message"><i class="fa fa-envelope-o"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div> <!-- end col -->
-
-
-
-            <div class="col-sm-6 col-lg-4">
-                <div class="card-box">
-                    <div class="contact-card">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="{{ asset('/images/users/avatar-4.jpg') }}" alt="">
-                        </a>
-                        <div class="member-info">
-                            <h4 class="m-t-0 m-b-5 header-title"><b>Bill Bertz</b></h4>
-                            <p class="text-muted">Branch manager</p>
-                            <p class="text-dark"><i class="md md-business m-r-10"></i><small>ABC company Pvt Ltd.</small></p>
-                            <div class="contact-action">
-                                <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
-                            </div>
-                        </div>
-
-                        <ul class="social-links list-inline m-0">
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Message"><i class="fa fa-envelope-o"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div> <!-- end col -->
-
-
-            <div class="col-sm-6 col-lg-4">
-                <div class="card-box">
-                    <div class="contact-card">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="{{ asset('/images/users/avatar-5.jpg') }}" alt="">
-                        </a>
-                        <div class="member-info">
-                            <h4 class="m-t-0 m-b-5 header-title"><b>Bill Bertz</b></h4>
-                            <p class="text-muted">Branch manager</p>
-                            <p class="text-dark"><i class="md md-business m-r-10"></i><small>ABC company Pvt Ltd.</small></p>
-                            <div class="contact-action">
-                                <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
-                            </div>
-                        </div>
-
-                        <ul class="social-links list-inline m-0">
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Message"><i class="fa fa-envelope-o"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div> <!-- end col -->
-
-
-            <div class="col-sm-6 col-lg-4">
-                <div class="card-box">
-                    <div class="contact-card">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="{{ asset('/images/users/avatar-6.jpg') }}" alt="">
-                        </a>
-                        <div class="member-info">
-                            <h4 class="m-t-0 m-b-5 header-title"><b>Bill Bertz</b></h4>
-                            <p class="text-muted">Branch manager</p>
-                            <p class="text-dark"><i class="md md-business m-r-10"></i><small>ABC company Pvt Ltd.</small></p>
-                            <div class="contact-action">
-                                <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
-                            </div>
-                        </div>
-
-                        <ul class="social-links list-inline m-0">
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Message"><i class="fa fa-envelope-o"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div> <!-- end col -->
-
-
-
-            <div class="col-sm-6 col-lg-4">
-                <div class="card-box">
-                    <div class="contact-card">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="{{ asset('/images/users/avatar-7.jpg') }}" alt="">
-                        </a>
-                        <div class="member-info">
-                            <h4 class="m-t-0 m-b-5 header-title"><b>Bill Bertz</b></h4>
-                            <p class="text-muted">Branch manager</p>
-                            <p class="text-dark"><i class="md md-business m-r-10"></i><small>ABC company Pvt Ltd.</small></p>
-                            <div class="contact-action">
-                                <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
-                            </div>
-                        </div>
-
-                        <ul class="social-links list-inline m-0">
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Message"><i class="fa fa-envelope-o"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div> <!-- end col -->
-
-
-            <div class="col-sm-6 col-lg-4">
-                <div class="card-box">
-                    <div class="contact-card">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="{{ asset('/images/users/avatar-8.jpg') }}" alt="">
-                        </a>
-                        <div class="member-info">
-                            <h4 class="m-t-0 m-b-5 header-title"><b>Bill Bertz</b></h4>
-                            <p class="text-muted">Branch manager</p>
-                            <p class="text-dark"><i class="md md-business m-r-10"></i><small>ABC company Pvt Ltd.</small></p>
-                            <div class="contact-action">
-                                <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
-                            </div>
-                        </div>
-
-                        <ul class="social-links list-inline m-0">
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Message"><i class="fa fa-envelope-o"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div> <!-- end col -->
-
-            <div class="col-sm-6 col-lg-4">
-                <div class="card-box">
-                    <div class="contact-card">
-                        <a class="pull-left" href="#">
-                            <img class="img-circle" src="{{ asset('/images/users/avatar-9.jpg') }}" alt="">
-                        </a>
-                        <div class="member-info">
-                            <h4 class="m-t-0 m-b-5 header-title"><b>Bill Bertz</b></h4>
-                            <p class="text-muted">Branch manager</p>
-                            <p class="text-dark"><i class="md md-business m-r-10"></i><small>ABC company Pvt Ltd.</small></p>
-                            <div class="contact-action">
-                                <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
-                            </div>
-                        </div>
-
-                        <ul class="social-links list-inline m-0">
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a>
-                            </li>
-                            <li>
-                                <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Message"><i class="fa fa-envelope-o"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div> <!-- end col -->
-
+                </div> <!-- end col -->
+            </div>
         </div>
 
     </div> <!-- container -->
@@ -433,6 +144,32 @@
 
 <script src="{{ asset('/js/jquery.core.js')}}"></script>
 <script src="{{ asset('/js/jquery.app.js')}}"></script>
+
+<script type="text/javascript" src="{{ asset('/js/vue.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/vue-resource.js') }}"></script>
+<script type="text/javascript">
+
+    new Vue({
+        el: 'body',
+        data: {
+            users: []
+        },
+        ready: function() {
+            this.fetchUsers();
+        },
+
+        methods: {
+            fetchUsers: function() {
+                this.$http.get('/api/users').then(function(response) {
+                console.log(response.data);
+                    this.$set('users', response.data);
+                });
+            }
+        }
+
+    });
+</script>
+
 
 
 

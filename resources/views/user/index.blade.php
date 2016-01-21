@@ -8,7 +8,6 @@
 
     <div class="container">
 
-        <!-- Page-Title -->
         <div class="row">
             <div class="col-sm-12">
                 <h4 class="page-title">Tableau de bord</h4>
@@ -18,7 +17,7 @@
 
 
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="card-box">
                     <div class="bar-widget">
                         <div class="table-box">
@@ -29,7 +28,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>8</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ $articles->count() }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Articles</p>
                             </div>
 
@@ -38,7 +37,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="card-box">
                     <div class="bar-widget">
                         <div class="table-box">
@@ -58,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="card-box">
                     <div class="bar-widget">
                         <div class="table-box">
@@ -77,29 +76,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-3">
-                <div class="card-box">
-                    <div class="bar-widget">
-                        <div class="table-box">
-                            <div class="table-detail">
-                                <div class="iconbox bg-danger">
-                                    <i class="ti-files"></i>
-                                </div>
-                            </div>
-
-                            <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>20</b></h4>
-                                <p class="text-muted m-b-0 m-t-0">Fichiers</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <!-- end row -->
 
         <div class="row">
 
@@ -133,14 +111,15 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tutoriel Java</td>
-                                        <td>Commment créer une application Java avec la base de données...</td>
-                                        <td>Programmation</td>
-                                        <td><span class="label label-info">01/12/2015</span></td>
-
-                                    </tr>
+                                    @foreach($articles as $article)
+                                        <tr>
+                                            <td>{{ $article->id }}</td>
+                                            <td><a href="{{ route('article', [auth()->user()->username, $article->id]) }}">{{ $article->title }}</a></td>
+                                            <td>{{ str_limit($article->description, 30) }}</td>
+                                            <td><mark>{{ $article->category->name }}</mark></td>
+                                            <td>{{ $article->created_at }}</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -152,12 +131,24 @@
 
         </div>
 
-        <!-- end row -->
-
-
-
-
     </div> <!-- container -->
 
 
+@endsection
+
+@section('scripts')
+    <!-- Notifications -->
+    <script src="{{ asset('/plugins/notifyjs/dist/notify.min.js') }}"></script>
+    <script src="{{ asset('/plugins/notifications/notify-metro.js') }}"></script>
+    <script>
+
+        jQuery(document).ready(function(){
+
+            if ('{{ session('notif') }}' === '1') {
+                $.Notification.notify('{{ session('type') }}','{{ session('position') }}','{{ session('title') }}', '{{ session('body') }}')
+            }
+
+        });
+
+    </script>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
@@ -15,9 +16,10 @@ class BlogsTableSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1,10) as $index) {
             DB::table('blogs')->insert([
-                'username' => $faker->userName,
+                'username' => User::find($index)->username,
                 'user_id' => $index,
                 'status' => $faker->randomElement(['active','inactive','disabled']),
+                'views' => $faker->numberBetween(0,100),
                 'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
             ]);
         }
