@@ -26,7 +26,7 @@ Route::get('/messages/new', [
 
 Route::get('/messages/{id}', [
     'as' => 'show_message',
-    'middleware' => ['auth','username'],
+    'middleware' => ['auth','username','read'],
     'uses'=>'MessageController@show'
 ]);
 

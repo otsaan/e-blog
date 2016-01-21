@@ -37,11 +37,7 @@
 
                                 @foreach($sentMessages as $message)
                                     <tr class="read">
-                                        <td class="mail-select" style="width: 20px">
-                                            <div class="checkbox checkbox-primary m-r-15">
-                                                <input id="checkbox1" type="checkbox">
-                                                <label for="checkbox1"></label>
-                                            </div>
+                                        <td>
                                         </td>
 
                                         <td>
