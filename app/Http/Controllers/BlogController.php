@@ -20,7 +20,7 @@ class BlogController extends Controller
         $user = User::where('username','=',$username)->first();
         $articles = Article::where('user_id','=',$user->id)->paginate(8);
 
-        return view('articles')->with([
+        return view('user.articles')->with([
             'user' => $user,
             'articles' => $articles
         ]);
@@ -48,7 +48,7 @@ class BlogController extends Controller
     {
         $user = User::where('username','=',$username)->first();
 
-        return view('contact')->with([
+        return view('user.contact')->with([
             'user' => $user,
         ]);
     }

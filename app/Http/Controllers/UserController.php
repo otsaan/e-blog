@@ -35,7 +35,7 @@ class UserController extends Controller
         $blogViews = auth()->user()->blog->views;
         $categoriesCount = Category::all()->count();
 
-        return view('index')->with([
+        return view('user.index')->with([
             'articles' => $articles,
             'blogViews' => $blogViews,
             'categoriesCount' => $categoriesCount
@@ -117,6 +117,6 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function profile() {
-        return view('profile');
+        return view('user.profile');
     }
  }
