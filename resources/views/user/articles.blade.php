@@ -115,47 +115,27 @@
 
 
                 <div class="col-lg-8 m-t-20">
-{{--                    @foreach($articles as $article)--}}
-                        {{--<div class="card-box m-b-10" style="padding: 5px 10px 5px 20px">--}}
-                            {{--<div class="table-box opport-box">--}}
-                                {{--<div>--}}
-                                    {{--<h3><b><a href="{{ route('article', [$user->username, $article->id]) }}">{{ $article->title }} </a></b> </h3>--}}
-                                    {{--<p class="text-right"><small><b>Catégorie: </b> <mark><a href="">{{ $article->category->name }}</a></mark></small></p>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-lg-12 m-t-20">--}}
-                            {{--<div class="panel panel-border panel-inverse">--}}
-                                {{--<div class="panel-heading">--}}
-                                    {{--<p class="panel-title"><b><a href="{{ route('article', [$user->username, $article->id]) }}">{{ $article->title }}</a></b> <small style="text-transform: lowercase"> dans <mark>{{ $article->category->name }}</mark></small></p>--}}
-                                {{--</div>--}}
-                                {{--<div class="panel-body">--}}
-                                    {{--<p>--}}
-                                        {{--{{ $article->description }}--}}
-                                    {{--</p>--}}
-                                {{--</div>--}}
-                                {{--<div class="panel-footer">--}}
-                                    {{--<p class="text-right" style="margin: 0"><small><b>Publié: </b>{{ $article->created_at->diffForHumans() }}</small></p>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
                     <div class="card-box">
                         <h4 class="m-t-0 header-title"><b>Articles</b></h4>
                         <div class="p-20">
-                            <div class="timeline-2">
-
-                                @foreach($articles as $article)
-                                    <div class="time-item">
-                                        <div class="item-info">
-                                            <div class="text-muted">{{ $article->created_at->diffForHumans() }}</div>
-                                            <h3><a href="{{ route('article', [$user->username, $article->id]) }}" class="text-info">{{ $article->title }}</a> <small>dans <a href="#" class="text-success">{{ $article->category->name }}</a></small</h3>
-                                            <p><em>"{{ $article->description }}"</em></p>
+                            @if(count($articles))
+                                <div class="timeline-2">
+                                    @foreach($articles as $article)
+                                        <div class="time-item">
+                                            <div class="item-info">
+                                                <div class="text-muted">{{ $article->created_at->diffForHumans() }}</div>
+                                                <h3><a href="{{ route('article', [$user->username, $article->id]) }}" class="text-info">{{ $article->title }}</a> <small>dans <a href="#" class="text-success">{{ $article->category->name }}</a></small</h3>
+                                                <p><em>"{{ $article->description }}"</em></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
-
-                            </div>
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="alert alert-info">
+                                    <h1>Pas d'articles!</h1>
+                                    <h3>Cet utilisateur n'a pas encore publié un article.</h3>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     {{--@endforeach--}}
