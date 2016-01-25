@@ -100,7 +100,7 @@ Route::group([
 
     Route::get('/post/{id}', [
         'as' => 'article',
-        'middleware' => ['exists','active'],
+        'middleware' => ['exists','active','incrementArticleViews'],
         'uses'=>'ArticleController@show'
     ]);
 
