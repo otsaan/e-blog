@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Blog;
+use App\Article;
 use Closure;
 
-class Active
+class IncrementArticleViews
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,13 @@ class Active
      */
     public function handle($request, Closure $next)
     {
-        $username = explode('/', $request->path())[0];
+        $id = $request->segment(3);
 
-        $blog = Blog::where('username', '=', $username)->first();
+        $article = Article::find($id);
 
-        if ($blog && $blog->status != 'active') {
-            return redirect()->route('disabled', $username);
+        if ($article) {
+            $article->views++;
+            $article->save();
         }
 
         return $next($request);

@@ -71,6 +71,14 @@ class BlogController extends Controller
         if($blog->status == 'active') {
             $blog->status = 'disabled';
             $blog->note = $request['note'];
+            $user = $blog->user;
+
+            Mail::send('email.deactivate', ['username'=> $blog->username, 'note' => $request->note],
+              function($message) use ($user) {
+                  $message->to($user['email'], $user['username'])
+                      ->subject('Désactivation du blog');
+            });
+
         } else {
             $blog->status = 'active';
         }

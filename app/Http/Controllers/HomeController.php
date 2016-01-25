@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use App\Http\Requests;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,9 +21,14 @@ class HomeController extends Controller
         return view('errors.404');
     }
 
-    public function disabled()
+    public function disabled($username)
     {
-        return view('errors.disabled');
+        $blog = Blog::where('username', '=', $username)->first();
+
+        return view('errors.disabled')->with([
+            'username' => $username,
+            'blog' => $blog
+        ]);
     }
 
     public function dashboard()

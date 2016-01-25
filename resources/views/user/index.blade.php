@@ -103,20 +103,22 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
                                         <th>Titre</th>
                                         <th>Description</th>
                                         <th>Catégorie</th>
+                                        <th>Vues</th>
+                                        <th>Likes</th>
                                         <th>Publié</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($articles as $article)
                                         <tr>
-                                            <td>{{ $article->id }}</td>
                                             <td><a href="{{ route('article', [auth()->user()->username, $article->id]) }}">{{ $article->title }}</a></td>
                                             <td>{{ str_limit($article->description, 30) }}</td>
                                             <td><mark>{{ $article->category->name }}</mark></td>
+                                            <td>{{ $article->views }}</td>
+                                            <td>{{ $article->likeCount }}</td>
                                             <td>{{ $article->created_at }}</td>
                                         </tr>
                                     @endforeach
