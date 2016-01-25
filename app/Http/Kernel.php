@@ -56,6 +56,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\IncrementBlogViews::class,
         ],
 
+        'incrementArticleViews' => [
+            \App\Http\Middleware\IncrementArticleViews::class,
+        ],
+
         'active' => [
             \App\Http\Middleware\Active::class,
         ],
