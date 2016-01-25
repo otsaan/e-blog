@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Blog;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -70,5 +71,26 @@ class AuthController extends Controller
             $message->to($data['email'], $data['username'])
                 ->subject('Confirmation de compte');
         });
+    }
+
+    public function register(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $this->create($request->all());
+
+        return redirect('/register')
+            ->with([
+                'alert' => true,
+                'hide_fields' => true,
+                'class' => 'alert-info',
+                'message' => '<strong>Un email sera envoyé dans quelques instant</strong>... veuillez vérifier votre boite de reception'
+            ]);
     }
 }
