@@ -52,7 +52,9 @@ class UserController extends Controller
         $user = User::find($request['id']);
 
         $user->firstName = $request['firstName'];
+        $user->sex = $request['sex'];
         $user->about = $request['about'];
+        $user->notify_email = $request['notify_email'];
         $user->lastName = $request['lastName'];
         $user->facebook = $request['facebook'];
         $user->linkedin = $request['linkedin'];
