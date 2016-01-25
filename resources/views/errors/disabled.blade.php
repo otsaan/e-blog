@@ -4,6 +4,7 @@
     <title>Blog désactivé</title>
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
 
     <style>
         html, body {
@@ -41,10 +42,12 @@
 <div class="container">
     <div class="content">
         <div class="title">Ce blog est désactivé.</div>
-        <div class="text-center">
-            <p>
-{{--                {{$blog->note}}--}}
-            </p>
+        <div class="text-left">
+            @if($authenticatedUser && $authenticatedUser->username == $username)
+                <br><br>
+                <h2>Message de l'admin:</h2>
+                <h3>{{ $blog->note }}</h3>
+            @endif
         </div>
     </div>
 </div>

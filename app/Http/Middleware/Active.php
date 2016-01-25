@@ -21,9 +21,7 @@ class Active
         $blog = Blog::where('username', '=', $username)->first();
 
         if ($blog && $blog->status != 'active') {
-            return redirect()->route('disabled', $username)->with([
-                'blog' => $blog
-            ]);
+            return redirect()->route('disabled', $username);
         }
 
         return $next($request);

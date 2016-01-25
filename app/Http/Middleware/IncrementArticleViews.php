@@ -16,8 +16,7 @@ class IncrementArticleViews
      */
     public function handle($request, Closure $next)
     {
-        $id = class_basename($request->getRequestUri());
-
+        $id = $request->segment(3);
 
         $article = Article::find($id);
 
