@@ -58,61 +58,8 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4">
 
-                    <div class="card-box m-t-20">
-                        <h4 class="m-t-0 header-title"><b>Contact</b></h4>
-                        <div class="p-20">
-                        {{--<div class="bg-picture text-center">--}}
-                            {{--<div class="profile-info-name">--}}
-                                <img src="{{ asset('/images/users/avatar-1.jpg') }}" class="thumb-lg img-circle" alt="profile-image">
-                                <h4 class="m-b-5"><b>{{ $user->username }}</b></h4>
-                                <p class="text-muted"> {{ $user->firstName . ' ' . $user->lastName }}</p>
-                            {{--</div>--}}
-                        </div>
-                        <div class="p-20">
-                            <div class="about-info-p">
-                                <strong>Email</strong>
-                                <br>
-                                <p class="text-muted">{{ $user->email }}</p>
-                            </div>
-                            <div class="about-info-p m-b-0">
-                                <ul class="social-links list-inline m-0">
-                                    <li>
-                                        <a href="{{ $user->facebook ? $user->facebook  : '#' }}" class="tooltips" data-original-title="Facebook">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ $user->twitter ? $user->twitter  : '#' }}" class="tooltips" data-original-title="Twitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ $user->linkedin ? $user->linkdein  : '#' }}" class="tooltips" data-original-title="LinkedIn">
-                                            <i class="fa fa-linkedin"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="mailto:{{ $user->email }}" class="tooltips" data-original-title="Message">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-box">
-                        <h4 class="m-t-0 header-title"><b>Bio</b></h4>
-
-                        <div class="p-20">
-                            <p>{{ $user->about }}</p>
-                        </div>
-                    </div>
-
-                </div>
-
+                @include('partials.blog-sidebar')
 
                 <div class="col-lg-8 m-t-20">
                     <div class="card-box">

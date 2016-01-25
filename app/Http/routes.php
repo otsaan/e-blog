@@ -44,6 +44,12 @@ Route::group(['middleware' => 'web'], function () {
         'uses'=>'BlogController@activate'
     ]);
 
+    Route::post('/blogs/{id}/report', [
+        'middleware' => ['auth'],
+        'as' => 'report',
+        'uses'=>'BlogController@report'
+    ]);
+
     Route::post('/like/{id}', [
         'middleware' => ['auth'],
         'uses'=>'ArticleController@like'
