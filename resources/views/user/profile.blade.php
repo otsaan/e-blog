@@ -47,7 +47,14 @@
                                 <div class="form-group">
                                     <label class="col-sm-5 control-label">Sexe</label>
                                     <div class="col-sm-7">
-                                        <input class="form-control" name="sex" value="{{ auth()->user()->sex }}" placeholder="Nom" />
+                                        <select class="form-control" name="sex" value="{{ auth()->user()->sex }}">
+                                            <option value="M" {{ auth()->user()->sex == 'M' ? 'selected="selected"' : '' }}>
+                                                M
+                                            </option>
+                                            <option value="F" {{ auth()->user()->sex == 'F' ? 'selected="selected"' : '' }}>
+                                                F
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -63,7 +70,22 @@
                                         <textarea class="form-control" rows="3" name="about">{{ auth()->user()->about }}</textarea>
                                     </div>
                                 </div>
-                                <br/>
+                                <br/><br/>
+                                <h4 class="m-b-30 m-t-0 header-title"><b>Notifications</b></h4>
+                                <p class="checkbox-inline">Quand on signale mon blog:</p>
+                                <div class="checkbox-inline disabled .col-md-3 .col-md-offset-1">
+                                    <p><label class="control-label">
+                                        <input type="checkbox" checked="checked" disabled>
+                                        Envoi d'un message
+                                    </label></p>
+                                </div>
+                                <div class="checkbox-inline">
+                                    <p><label class="control-label">
+                                        <input type="checkbox" {{ auth()->user()->notify_email ? 'checked="checked"' : '' }} name="notify_email" value="1">
+                                        Envoi d'un email
+                                    </label></p>
+                                </div>
+                                <br><br><br>
                                 <div class="row">
                                     <div class="col-md-6"></div>
                                     <div class="col-md-6">

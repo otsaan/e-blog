@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('level')->nullable();
             $table->string('about')->nullable();
             $table->string('photo')->nullable();
+            $table->string('sex')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('notify_email')->default(0);
 
             $table->string('role');
             $table->string('facebook')->nullable();
