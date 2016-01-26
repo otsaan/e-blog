@@ -17,28 +17,54 @@
         </div>
 
 
-        <div class="card-box">
-            <div class="row">
-                <div class="col-md-6">
-                    <form method="post" action="{{ route('import_csv', 'admin') }}" enctype="multipart/form-data">
-                        {!! csrf_field() !!}
-                        <div class="form-group">
-                            <label class="control-label">Le fichier CSV doit contenir deux colonnes :</label>
-                            <p>
-                                <ul>
-                                    <li>Email</li>
-                                    <li>CNE</li>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card-box">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if(session('alert'))
+                                <div class="alert alert-{{ session('class') }}">
+                                    <a class="close" data-dismiss="alert" href="#">×</a>
+                                    <p>{!! session('message') !!}</p>
+                                </div>
+                                <hr>
+                            @endif
+                            <form method="post" action="/admin/initiate" enctype="multipart/form-data">
+                                {!! csrf_field() !!}
+                                <ul class="list-unstyled">
+                                    <h3>Uploader le fichier CSV</h3>
+                                    <hr>
+                                    <div class="form-group">
+                                        <li>
+                                            <label class="radio-inline">
+                                                <input name="type" value="eleve" checked="" type="radio"> <p style="display: inline">Elèves</p> <label class="label label-warning">CNE, EMAIL</label>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label class="radio-inline">
+                                                <input name="type" value="prof" type="radio"> <p style="display: inline">Profs</p> <label class="label label-warning">CIN, EMAIL</label>
+                                            </label>
+                                        </li>
+                                    </div>
                                 </ul>
-                            </p>
-                            <input type="file" name="csv" class="filestyle" data-iconname="fa fa-cloud-upload">
-                        </div>
+                                <div class="form-group">
+                                    <input type="file" name="csv" class="filestyle" accept="text/csv" data-iconname="fa fa-cloud-upload" required>
+                                </div>
 
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Importer">
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary" value="Importer CSV">
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <div class="col-md-6"></div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
             </div>
         </div>
 

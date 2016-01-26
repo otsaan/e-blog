@@ -7,7 +7,9 @@ use App\Blog;
 use App\Tag;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-  
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use mnshankar\CSV\CSV;
 
 class AdminController extends Controller
@@ -23,7 +25,6 @@ class AdminController extends Controller
         $csvFile = $request->file('csv');
 
         $fileName = str_random(10) . $csvFile->getClientOriginalName();
-
         $csvFile->move(storage_path('uploads'), $fileName);
 
         $csv = new CSV();
@@ -31,8 +32,17 @@ class AdminController extends Controller
         $arr = $csv->fromFile(storage_path('uploads/'.$fileName),true)
             ->toArray();
 
-        return view('admin.initiate')->with([
-            'users' => $arr
+        $arr = collect($arr)->map(function($row, $k) use ($request){
+            $row['type'] = $request->input('type');
+            return $row;
+        })->toArray();
+
+        DB::table('allowed_users')->insert($arr);
+
+        return redirect()->back()->with([
+            'alert' => true,
+            'class' => 'success',
+            'message' => 'Le fichier à été importé vers la base données (table: <strong>allowed_users</strong>)'
         ]);
     }
 
