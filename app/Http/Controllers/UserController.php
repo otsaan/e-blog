@@ -47,10 +47,11 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = User::find($request['id']);
+        $user = auth()->user();
 
         $user->firstName = $request['firstName'];
-        $user->sex = $request['sex'];
+        $user->gender = $request['gender'];
+        $user->photo = $request['photo'];
         $user->about = $request['about'];
         $user->notify_email = $request['notify_email'];
         $user->lastName = $request['lastName'];
@@ -58,9 +59,23 @@ class UserController extends Controller
         $user->linkedin = $request['linkedin'];
         $user->twitter = $request['twitter'];
 
+
+        if ($request->hasFile('photo')) {
+
+            $fileName = str_random(4) .'-'. $user->username .'-'.$request->file('photo')->getClientOriginalName();
+            $request->file('photo')->move(public_path('uploads'), $fileName);
+            $user->photo = $fileName;
+        }
+
         $user->save();
 
-        return redirect()->back();
+        return redirect()
+            ->back()
+            ->with([
+                'alert' => true,
+                'class' => 'success',
+                'message' => 'Profil à été modifié avec succès.'
+            ]);
     }
 
     /**

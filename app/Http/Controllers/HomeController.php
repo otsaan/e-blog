@@ -18,7 +18,6 @@ class HomeController extends Controller
                 ->get()
                 ->take(20)
                 ->map(function($u) {
-                    $u->photo = asset('images/'.$u->photo);
                     $u->fullName = $u->firstName . ' ' . $u->lastName;
                     $u->blogUrl = url('/') . '/' . $u->username;
                     return $u;

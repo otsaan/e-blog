@@ -1,12 +1,13 @@
 @extends('layout')
 
-
 @section('title', 'Profile')
 
 @section('styles')
-        <!-- X-editable css -->
-<link type="text/css" href="{{ asset('/plugins/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css')}}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('/plugins/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css')}}" rel="stylesheet">
 @endsection
+
+
+
 
 @section('content')
     <div class="container">
@@ -14,23 +15,33 @@
         <!-- Page-Title -->
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="page-title">Profil</h4> <br>
+                <h4 class="page-title">Profil</h4><br>
             </div>
         </div>
 
+        <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('post_profile', auth()->user()->username) }}" method="post">
+            {!! csrf_field() !!}
 
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card-box">
-                    <div class="row">
-                        <form class="form-horizontal" method="post">
+            <div class="card-box">
 
-                            {{ csrf_field() }}
+                @if(session('alert'))
+                    <div class="alert alert-{{ session('class') }}">
+                        <a class="close" data-dismiss="alert" href="#">×</a>
+                        <p>{!! session('message') !!}</p>
+                    </div>
+                    <hr>
+                @endif
 
-                            <input name="id" type="hidden" value="{{ auth()->user()->id }}"/>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4>Information personnelles</h4>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <img src="{{ asset('uploads').'/'. auth()->user()->photo }}"  class="img thumbnail" width="150" alt="">
+                            </div>
+                            <div class="col-lg-10">
 
-                            <div class="col-lg-8">
-                                <h4 class="m-b-30 m-t-0 header-title"><b>Informations personnelles</b></h4>
                                 <div class="form-group">
                                     <label class="col-sm-5 control-label">Nom</label>
                                     <div class="col-sm-7">
@@ -45,22 +56,30 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="col-sm-5 control-label">Photo</label>
+                                    <div class="col-sm-7">
+                                        <input type="file" class="form-control" name="photo"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label class="col-sm-5 control-label">Sexe</label>
                                     <div class="col-sm-7">
-                                        <select class="form-control" name="sex" value="{{ auth()->user()->sex }}">
-                                            <option value="M" {{ auth()->user()->sex == 'M' ? 'selected="selected"' : '' }}>
+                                        <select class="form-control" name="gender" value="{{ auth()->user()->gender }}">
+                                            <option value="M" {{ auth()->user()->gender == 'M' ? 'selected="selected"' : '' }}>
                                                 M
                                             </option>
-                                            <option value="F" {{ auth()->user()->sex == 'F' ? 'selected="selected"' : '' }}>
+                                            <option value="F" {{ auth()->user()->gender == 'F' ? 'selected="selected"' : '' }}>
                                                 F
                                             </option>
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="col-sm-5 control-label">Date de naissance</label>
                                     <div class="col-sm-7">
-                                        <input class="form-control" type="date" name="dob" value="{{ auth()->user()->dob }}"/>
+                                        <input class="form-control" type="date" name="birthdate" value="{{ auth()->user()->birthdate }}"/>
 
                                     </div>
                                 </div>
@@ -70,57 +89,25 @@
                                         <textarea class="form-control" rows="3" name="about">{{ auth()->user()->about }}</textarea>
                                     </div>
                                 </div>
-                                <br/><br/>
-                                <h4 class="m-b-30 m-t-0 header-title"><b>Notifications</b></h4>
-                                <p class="checkbox-inline">Quand on signale mon blog:</p>
-                                <div class="checkbox-inline disabled .col-md-3 .col-md-offset-1">
-                                    <p><label class="control-label">
-                                        <input type="checkbox" checked="checked" disabled>
-                                        Envoi d'un message
-                                    </label></p>
-                                </div>
-                                <div class="checkbox-inline">
-                                    <p><label class="control-label">
-                                        <input type="checkbox" {{ auth()->user()->notify_email ? 'checked="checked"' : '' }} name="notify_email" value="1">
-                                        Envoi d'un email
-                                    </label></p>
-                                </div>
-                                <br><br><br>
-                                <div class="row">
-                                    <div class="col-md-6"></div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"></label>
-                                            <div class="col-sm-7">
-                                                <input class="form-control btn btn-primary" type="submit" value="Enregistrer">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
 
+                            </div>
+                        </div>
                     </div>
 
-
-
-
+                    <div class="col-lg-4">
+                        <h4>Quand on signale mon blog</h4><hr>
+                        <input type="checkbox" name="notify_message" value="1" checked disabled> Envoyer moi un message <br>
+                        <input type="checkbox" {{ auth()->user()->notify_email ? 'checked="checked"' : '' }} name="notify_mail" value="1"> Envoyer moi un email
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-10">
+                        <input class="form-control btn btn-primary" type="submit" value="Enregistrer">
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- end row -->
-
-    </div> <!-- container -->
-
-
-    @endsection
-
-
-    @section('scripts')
-
-            <!-- XEditable Plugin -->
-    <script src=" {{ asset('/plugins/moment/moment.js')}}"></script>
-    <script src=" {{ asset('/plugins/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js')}}"></script>
-    <script src=" {{ asset('/pages/jquery.xeditable.js')}}"></script>
+        </form>
+    </div>
 
 @endsection

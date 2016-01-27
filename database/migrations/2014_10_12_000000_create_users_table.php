@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('level')->nullable();
             $table->string('about')->nullable();
-            $table->string('photo')->nullable();
-            $table->string('sex')->nullable();
-            $table->date('dob')->nullable();
+            $table->string('photo')->default('noavatar.jpg');
+            $table->string('gender')->nullable();
+            $table->date('birthdate')->nullable();
             $table->string('notify_email')->default(0);
 
             $table->string('role');

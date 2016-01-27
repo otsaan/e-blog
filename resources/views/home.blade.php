@@ -81,7 +81,7 @@
                     <div class="card-box">
                         <div class="contact-card">
                             <a class="pull-left" href="#">
-                                <img class="img-circle" src="{{ $user->photo }}" alt="">
+                                <img class="img-circle" src="{{ asset('uploads').'/'. $user->photo }}" alt="">
                             </a>
                             <div class="member-info">
                                 <h4 class="m-t-0 m-b-5 header-title"><b>{{ $user->fullName }}</b></h4>
@@ -94,6 +94,9 @@
                                 @endif
                                 @if($user->linkedin)
                                     <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="{{ $user->linkedin }}" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+                                @endif
+                                @if(!$user->linkedin && !$user->facebook)
+                                        <br>
                                 @endif
                             </ul>
                         </div>

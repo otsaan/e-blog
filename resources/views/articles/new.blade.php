@@ -23,46 +23,6 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12">
-
-                <div class="card-box">
-                    <form id="form" method="POST" action="@{{ action }}" @submit="onSubmit">
-
-                        <input type="hidden" name="id" value="@{{ article.id }}" />
-                        <h4 class="m-b-30 m-t-0 header-title"><b>@{{ title }}</b></h4>
-
-                        {!! csrf_field() !!}
-
-                        <div class="form-group">
-                            <label>Titre</label>
-                            <input type="text" class="form-control" name="title" placeholder="Titre" value="@{{ article.title }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Description</label>
-                            <textarea class="form-control" name="description" rows="1">@{{ article.description }}</textarea>
-                        </div>
-                        <input type="hidden" id="content" name="content" value="" />
-                        <div class="form-group">
-                            <label>Catégorie</label>
-                            <select class="form-control" name="category" v-model="category">
-                                @foreach($categories as $categorie)
-                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div id="summernote"></div>
-                        <div class="form-group">
-                            <label>Tags</label>
-                            <input type="text" id="input-tags" name="tags">
-                        </div>
-                        <button type="submit" class="btn btn-default btn-lg">@{{ submit }}</button>
-                        <button class="btn btn-lg" v-show="annuler" onClick="history.go(0)">Annuler</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
 
             <div class="col-lg-12">
 
@@ -116,6 +76,47 @@
                 </div>
             </div>
 
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="card-box">
+                    <form id="form" method="POST" action="@{{ action }}" @submit="onSubmit">
+
+                        <input type="hidden" name="id" value="@{{ article.id }}" />
+                        <h4 class="m-b-30 m-t-0 header-title"><b>@{{ title }}</b></h4>
+
+                        {!! csrf_field() !!}
+
+                        <div class="form-group">
+                            <label>Titre</label>
+                            <input type="text" class="form-control" name="title" placeholder="Titre" value="@{{ article.title }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" name="description" rows="1">@{{ article.description }}</textarea>
+                        </div>
+                        <input type="hidden" id="content" name="content" value="" />
+                        <div class="form-group">
+                            <label>Catégorie</label>
+                            <select class="form-control" name="category" v-model="category">
+                                @foreach($categories as $categorie)
+                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div id="summernote"></div>
+                        <div class="form-group">
+                            <label>Tags</label>
+                            <input type="text" id="input-tags" name="tags">
+                        </div>
+                        <button type="submit" class="btn btn-default btn-lg">@{{ submit }}</button>
+                        <button class="btn btn-lg" v-show="annuler" onClick="history.go(0)">Annuler</button>
+                    </form>
+                </div>
+            </div>
         </div>
 
 

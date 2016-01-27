@@ -76,6 +76,7 @@ Route::group([
 
     Route::post('/profile', [
         'middleware' => ['auth','username'],
+        'as' => 'post_profile',
         'uses'=>'UserController@update'
     ]);
 
