@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 
+use App\Article;
 use App\Blog;
 use App\Tag;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use mnshankar\CSV\CSV;
@@ -48,35 +50,49 @@ class AdminController extends Controller
 
     public function statistics()
     {
-        $frequentTags = Tag::with('articles')->get()->map(function($t) {
-            return [
-                'name' => $t->name,
-                'articlesCount' => $t->articles()->get()->count()
-            ];
-        })->sortByDesc('articlesCount')->take(10);
+        $frequentTags = Tag::with('articles')
+            ->get()
+            ->take(10)
+            ->map(function($t) {
+                return [
+                    'label' => $t->name,
+                    'data' => $t->articles()->get()->count(),
+                ];
+            });
 
         $activeBloggers = Blog::with('articles')
-            ->with('user')
             ->get()
+            ->take(10)
             ->map(function($b) {
                 return [
                     'username' => $b->username,
                     'articlesCount' => $b->articles()->get()->count(),
-                    'user' => $b->user()->get()
                 ];
-            })->sortByDesc('articlesCount')->take(10);
+            });
 
         $mostVisitedBlogs = Blog::with('user')
             ->get()
-            ->sortByDesc('views')
-            ->take(10);
+            ->take(10)
+            ->map(function($b){
+                return [
+                    'label' => $b->user['firstName'] .' '.$b->user['firstName']. ' ('.$b->username.')',
+                    'data' => $b->views
+                ];
+            });
 
+        $disabledBlogsCount = Blog::with('user')
+            ->where('status', 'inactive')
+            ->count();
 
         return view('admin.statistics')
-            ->with(dd([
+            ->with([
                 'frequentTags' => $frequentTags,
                 'activeBloggers' => $activeBloggers,
-                'mostVisitedBlogs' => $mostVisitedBlogs
-            ]));
+                'mostVisitedBlogs' => $mostVisitedBlogs,
+                'disabledBlogsCount' => $disabledBlogsCount,
+                'studentsCount' => User::where('role','=','eleve')->get()->count(),
+                'teachersCount' => User::where('role','=','prof')->get()->count(),
+                'articlesCount' => Article::all()->count(),
+            ]);
         }
 }
