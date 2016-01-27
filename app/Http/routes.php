@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => 'web'], function () {
 
-
     Route::get('/', 'HomeController@index');
-
 
     Route::get('/404', [
         'as' => '404',
@@ -16,7 +14,6 @@ Route::group(['middleware' => 'web'], function () {
     ]);
 
     //=============== API routes ===============
-    Route::get('/api/users', 'HomeController@getUsers');
     Route::get('/api/article/{id}', 'ArticleController@get');
 
     //=============== User routes ===============
@@ -149,12 +146,6 @@ Route::group([
     Route::get('/blogs/{id}/articles', [
         'as' => 'articles-blog',
         'uses'=>'BlogController@articles'
-    ]);
-
-    Route::get('/statistics', [
-        'as' => 'statistics',
-        'middleware' => ['auth','username','admin'],
-        'uses'=>'AdminController@statistics'
     ]);
     
     Route::get('/initiate', [

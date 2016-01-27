@@ -17,6 +17,9 @@ class BlogController extends Controller
 
     public function index($username)
     {
+        if ($username = 'admin') {
+            return redirect('/dashboard');
+        }
 
         $user = User::where('username','=',$username)->first();
         $articles = Article::where('user_id','=',$user->id)->paginate(8);

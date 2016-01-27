@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Blog;
 use App\Category;
+use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -24,10 +25,7 @@ class UserController extends Controller
     {
         if ($username == 'admin') {
             $users = User::with('blog')->where('role','=','user')->get();
-
-            return view('admin.index')->with([
-                'users' => $users
-            ]);
+            return view('admin.index')->with($this->statistics());
         }
 
         $articles = Article::where('user_id', '=', auth()->user()->id)->get();
@@ -120,5 +118,53 @@ class UserController extends Controller
      */
     public function profile() {
         return view('user.profile');
+    }
+
+
+    public function statistics()
+    {
+        $frequentTags = Tag::with('articles')
+            ->get()
+            ->take(10)
+            ->map(function($t) {
+                return [
+                    'label' => $t->name,
+                    'data' => $t->articles()->get()->count(),
+                ];
+            });
+
+        $activeBloggers = Blog::with('articles')
+            ->get()
+            ->take(10)
+            ->map(function($b) {
+                return [
+                    'username' => $b->username,
+                    'articlesCount' => $b->articles()->get()->count(),
+                ];
+            });
+
+        $mostVisitedBlogs = Blog::with('user')
+            ->get()
+            ->take(10)
+            ->map(function($b){
+                return [
+                    'label' => $b->user['firstName'] .' '.$b->user['firstName']. ' ('.$b->username.')',
+                    'data' => $b->views
+                ];
+            });
+
+        $disabledBlogsCount = Blog::with('user')
+            ->where('status', 'inactive')
+            ->count();
+
+        return [
+            'frequentTags' => $frequentTags,
+            'activeBloggers' => $activeBloggers,
+            'mostVisitedBlogs' => $mostVisitedBlogs,
+            'disabledBlogsCount' => $disabledBlogsCount,
+            'studentsCount' => User::where('role','=','eleve')->get()->count(),
+            'teachersCount' => User::where('role','=','prof')->get()->count(),
+            'articlesCount' => Article::all()->count(),
+        ];
     }
  }

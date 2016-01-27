@@ -13,7 +13,17 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        return view('home')
+            ->with(['users'=> User::where('role','!=','admin')
+                ->get()
+                ->take(20)
+                ->map(function($u) {
+                    $u->photo = asset('images/'.$u->photo);
+                    $u->fullName = $u->firstName . ' ' . $u->lastName;
+                    $u->blogUrl = url('/') . '/' . $u->username;
+                    return $u;
+                })
+            ]);
     }
 
     public function notFound()
@@ -34,18 +44,5 @@ class HomeController extends Controller
     public function dashboard()
     {
         return redirect()->route('dashboard', auth()->user()->username);
-    }
-
-    public function getUsers()
-    {
-        return User::where('role','user')
-            ->get()
-            ->map(function($u) {
-                $u->photo = asset('images/'.$u->photo);
-                $u->fullName = $u->firstName . ' ' . $u->lastName;
-                $u->blogUrl = url('/') . '/' . $u->username;
-                return $u;
-            });
-
     }
 }

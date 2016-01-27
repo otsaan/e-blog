@@ -62,7 +62,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h3 class="modal-title">Signaler ce blog</h3>
                     </div>
-                    <form action="{{ route('report', $user->blog->id) }}" method="post">
+                    <form action="{{ route('report', $user->blog['id']) }}" method="post">
 
                         <div class="modal-body">
                             <h4>Pourquoi voulez-vous signaler ce blog?</h4>

@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'photo' => 'noavatar.jpg',
                 'email'=> $faker->email,
                 'cne'=> strtoupper(str_random(10). $index),
-                'role'=> 'user',
+                'role'=> $faker->randomElement(['prof','eleve']),
                 'confirmed'=> 1,
                 'password'=> bcrypt('password'),
                 'level' => $faker->randomElement([
@@ -53,16 +53,5 @@ class UsersTableSeeder extends Seeder
             'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
         ]);
 
-        DB::table('users')->insert([
-            'firstName' => 'simo',
-            'lastName' => 'l3aniba',
-            'username' => 'simo',
-            'confirmed'=> 1,
-            'cne'=> 'ANASIMO',
-            'email'=> 'simo@simo.com',
-            'role'=> 'user',
-            'password'=> bcrypt('password'),
-            'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
-        ]);
     }
 }
