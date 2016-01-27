@@ -150,6 +150,11 @@ Route::group([
         'as' => 'articles-blog',
         'uses'=>'BlogController@articles'
     ]);
+
+    Route::get('/blogs/{id}/articles/{articleId}', [
+        'as' => 'admin-article',
+        'uses'=>'ArticleController@showAdmin'
+    ]);
     
     Route::get('/initiate', [
         'as' => 'initiate',
