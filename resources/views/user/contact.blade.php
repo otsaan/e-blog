@@ -47,20 +47,7 @@
     <!-- Start content -->
     <div class="content">
         <div class="wraper container-fluid">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="bg-picture text-center">
-                        <div class="bg-picture-overlay"></div>
-                        <div class="profile-info-name">
-                            <img src="{{asset('/images/users/avatar-1.jpg')}}" class="thumb-lg img-circle img-thumbnail" alt="profile-image">
-                            <h4 class="m-b-5"><b>{{ $user->username }}</b></h4>
-                            <p class="text-muted"><i class="fa fa-user"></i> {{ $user->firstName . ' ' . $user->lastName }}</p>
-                        </div>
-                    </div>
-                    <!--/ meta -->
-                </div>
-            </div>
-
+            <br><br><br><br>
 
             <div class="row">
 
