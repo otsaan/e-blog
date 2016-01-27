@@ -24,5 +24,31 @@ class ArticlesTableSeeder extends Seeder
                 'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
             ]);
         }
+
+
+
+        foreach (range(1,5) as $index) {
+            DB::table('articles')->insert([
+                'title' => $faker->sentence(3),
+                'content' => $faker->text,
+                'views' => $faker->numberBetween(0,100),
+                'user_id' => 9,
+                'blog_id' => 9,
+                'category_id' => $faker->numberBetween(1,10),
+                'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
+            ]);
+        }
+
+        foreach (range(1,8) as $index) {
+            DB::table('articles')->insert([
+                'title' => $faker->sentence(3),
+                'content' => $faker->text,
+                'views' => $faker->numberBetween(0,100),
+                'user_id' => 10,
+                'blog_id' => 10,
+                'category_id' => $faker->numberBetween(1,10),
+                'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
+            ]);
+        }
     }
 }

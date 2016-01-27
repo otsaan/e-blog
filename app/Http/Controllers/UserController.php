@@ -51,7 +51,6 @@ class UserController extends Controller
 
         $user->firstName = $request['firstName'];
         $user->gender = $request['gender'];
-        $user->photo = $request['photo'];
         $user->about = $request['about'];
         $user->notify_email = $request['notify_email'];
         $user->lastName = $request['lastName'];
@@ -61,7 +60,6 @@ class UserController extends Controller
 
 
         if ($request->hasFile('photo')) {
-
             $fileName = str_random(4) .'-'. $user->username .'-'.$request->file('photo')->getClientOriginalName();
             $request->file('photo')->move(public_path('uploads'), $fileName);
             $user->photo = $fileName;
