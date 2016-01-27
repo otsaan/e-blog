@@ -39,7 +39,7 @@ class ArticleController extends Controller
             'views' => 0,
             'user_id' => auth()->user()->id,
             'blog_id' => 1,
-            'category_id' => $request['category'],
+            'category_id' => $request['category'] ? $request['category'] : 0,
         ]);
 
         $article->save();
@@ -56,7 +56,14 @@ class ArticleController extends Controller
         }
 
 
-        return redirect()->route('articles', auth()->user()->username);
+        return redirect()
+            ->back()
+            ->with([
+                'alert' => true,
+                'update' => true,
+                'class' => 'success',
+                'message' => 'Article crée avec succèss'
+            ]);
     }
 
     public function update(Request $request)
@@ -81,7 +88,14 @@ class ArticleController extends Controller
             }
         }
 
-        return redirect()->back();
+        return redirect()
+            ->back()
+            ->with([
+                'alert' => true,
+                'update' => true,
+                'class' => 'success',
+                'message' => 'Article modifié avec succèss'
+            ]);
     }
 
     public function destroy($id)

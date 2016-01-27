@@ -1,19 +1,28 @@
 <div class="col-md-4">
 
     <div class="card-box m-t-20">
-        <h4 class="m-t-0 header-title"><b>Contact</b></h4>
         <div class="p-20">
-            <img src="{{ asset('/images/users/avatar-1.jpg') }}" class="thumb-lg img-circle" alt="profile-image">
-            <h4 class="m-b-5"><b>{{ $user->username }}</b></h4>
-            <p class="text-muted"> {{ $user->firstName . ' ' . $user->lastName }}</p>
+            <img src="{{ asset('uploads').'/'.$user->photo }}" class="thumb-lg thumbnail" alt="profile-image">
+            <h3><b>{{ $user->firstName . ' ' . $user->lastName }}</b>
+                <small><p class="text-muted">{{ $user->username }}</p></small>
+            </h3>
         </div>
+
         <div class="p-20">
             <div class="about-info-p">
                 <strong>Email</strong>
                 <br>
                 <p class="text-muted">{{ $user->email }}</p>
-            </div>
-            <div class="about-info-p m-b-0">
+                <hr>
+                <strong>Status</strong>
+                <br>
+                <p class="text-muted">{{ $user->role }}</p>
+                @if($user->role == 'eleve' && !empty($user->level))
+                    <hr>
+                    <p><span class="label label-inverse">{{ $user->level }}</span></p>
+                @endif
+                <hr>
+
                 <ul class="social-links list-inline m-0">
                     <li>
                         <a href="{{ $user->facebook ? $user->facebook  : '#' }}" class="tooltips" data-original-title="Facebook">
@@ -21,12 +30,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ $user->twitter ? $user->twitter  : '#' }}" class="tooltips" data-original-title="Twitter">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ $user->linkedin ? $user->linkdein  : '#' }}" class="tooltips" data-original-title="LinkedIn">
+                        <a href="{{ $user->linkedin ? $user->linkedin  : '#' }}" class="tooltips" data-original-title="LinkedIn">
                             <i class="fa fa-linkedin"></i>
                         </a>
                     </li>
@@ -36,25 +40,27 @@
                         </a>
                     </li>
                 </ul>
+
+                @if ($authenticatedUser && $authenticatedUser->username != auth()->user()->username)
+                    <hr>
+                    <p style="font-size:0.9em"><a data-toggle="modal" data-target="#modal" href="#"><span class="text-danger"><i class="fa fa-minus-circle"></i>  Signaler un abus</span></a></p>
+                @endif
+            </div>
+
+        </div>
+    </div>
+
+    @if(!empty($user->about))
+        <div class="card-box">
+            <h4 class="m-t-0 header-title"><b>Bio</b></h4>
+
+            <div class="p-20">
+                <p>{{ $user->about }}</p>
             </div>
         </div>
-    </div>
+    @endif
 
-    <div class="card-box">
-        <h4 class="m-t-0 header-title"><b>Bio</b></h4>
-
-        <div class="p-20">
-            <p>{{ $user->about }}</p>
-        </div>
-    </div>
-
-    <br>
-    @if ($authenticatedUser)
-        <div class="text-center">
-            <a href="#" data-toggle="modal" data-target="#modal" style="color: red"><i class="ti-flag-alt"> Signaler</i></a>
-        </div>
-        <br><br>
-
+    @if ($authenticatedUser && $authenticatedUser->username != auth()->user()->username)
         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

@@ -86,19 +86,13 @@
                             <div class="member-info">
                                 <h4 class="m-t-0 m-b-5 header-title"><b>{{ $user->fullName }}</b></h4>
                                 <p class="text-muted"><a href="{{ $user->blogUrl }}">{{ $user->blogUrl }}</a></p>
-                                <p class="text-dark"><i class="ti-comment m-r-10"></i><small>{{ $user->about }}</small></p>
+                                @if($user->about)
+                                    <p class="text-dark"><small>{{ $user->about }}</small></p>
+                                @else
+                                    <p class="text-dark"><br></p>
+                                @endif
                             </div>
-                            <ul class="social-links list-inline m-0">
-                                @if($user->facebook)
-                                    <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="{{ $user->facebook }}" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                @endif
-                                @if($user->linkedin)
-                                    <li><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="{{ $user->linkedin }}" data-original-title="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-                                @endif
-                                @if(!$user->linkedin && !$user->facebook)
-                                        <br>
-                                @endif
-                            </ul>
+
                         </div>
                     </div>
 
