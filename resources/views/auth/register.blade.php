@@ -77,6 +77,21 @@
 
                     <div class="form-group">
                         <div class="col-xs-12">
+                            <ul class="list-unstyled">
+                                <li><label class="radio-inline"><input name="type" type="radio" value="eleve">Elève</label></li>
+                                <li><label class="radio-inline"><input name="type" type="radio" value="prof">Prof</label></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" name="cne" required="" placeholder="CNE/CIN">
+                        </div>
+                    </div>
+
+                        <div class="form-group">
+                        <div class="col-xs-12">
                             <input class="form-control" type="password" name="password" required="" placeholder="Mot de passe">
                         </div>
                     </div>
