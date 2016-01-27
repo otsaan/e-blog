@@ -51,15 +51,6 @@
                                     <textarea name="content" rows="10" class="form-control"></textarea>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="checkbox checkbox-primary">
-                                        <input name="sendEmail" id="sendEmail" type="checkbox">
-                                        <label for="sendEmail">
-                                            Envoyer un email
-                                        </label>
-                                    </div>
-                                </div>
-
                                 <div class="btn-toolbar form-group m-b-0">
                                     <div class="pull-right">
                                         <button type="submit" class="btn btn-primary waves-effect waves-light"> <span>Envoyer</span> <i class="fa fa-send m-l-10"></i> </button>
