@@ -91,50 +91,55 @@
             <div class="col-sm-12">
 
                 <div class="card-box">
-                    <form id="form" method="POST" action="@{{ action }}" @submit="onSubmit">
 
-                        @if(session('alert') && session('create'))
-                            <hr>
-                            <div class="alert alert-{{ session('class') }}">
-                                <a class="close" data-dismiss="alert" href="#">×</a>
-                                <p>{!! session('message') !!}</p>
+                    @if(count($categories) > 0)
+                        <form id="form" method="POST" action="@{{ action }}" @submit="onSubmit">
+
+                            @if(session('alert') && session('create'))
+                                <hr>
+                                <div class="alert alert-{{ session('class') }}">
+                                    <a class="close" data-dismiss="alert" href="#">×</a>
+                                    <p>{!! session('message') !!}</p>
+                                </div>
+                            @endif
+
+                            <input type="hidden" name="id" value="@{{ article.id }}" />
+                            <h4 class="m-b-30 m-t-0 header-title"><b>@{{ title }}</b></h4>
+
+                            {!! csrf_field() !!}
+
+                            <div class="form-group">
+                                <label>Titre</label>
+                                <input type="text" class="form-control" required name="title" placeholder="Titre" value="@{{ article.title }}">
                             </div>
-                        @endif
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" required name="description" rows="1">@{{ article.description }}</textarea>
+                            </div>
+                            <input type="hidden" id="content" name="content" value="" />
+                            <div class="form-group">
+                                <label>Catégorie</label>
+                                <select class="form-control" name="category" v-model="category">
+                                    @foreach($categories as $categorie)
+                                        <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                    @endforeach
 
-                        <input type="hidden" name="id" value="@{{ article.id }}" />
-                        <h4 class="m-b-30 m-t-0 header-title"><b>@{{ title }}</b></h4>
-
-                        {!! csrf_field() !!}
-
-                        <div class="form-group">
-                            <label>Titre</label>
-                            <input type="text" class="form-control" name="title" placeholder="Titre" value="@{{ article.title }}">
-                        </div>
-                        <div class="form-group">
-                            <label>Description</label>
-                            <textarea class="form-control" name="description" rows="1">@{{ article.description }}</textarea>
-                        </div>
-                        <input type="hidden" id="content" name="content" value="" />
-                        <div class="form-group">
-                            <label>Catégorie</label>
-                            <select class="form-control" name="category" v-model="category">
-                                @foreach($categories as $categorie)
-                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
-                                @endforeach
-
-                                @if($categories->count() == 0)
-                                    <option value="0" selected>No category</option>
-                                @endif
-                            </select>
-                        </div>
-                        <div id="summernote"></div>
-                        <div class="form-group">
-                            <label>Tags</label>
-                            <input type="text" id="input-tags" name="tags">
-                        </div>
-                        <button type="submit" class="btn btn-default btn-md">@{{ submit }}</button>
-                        <button class="btn btn-lg" v-show="annuler" onClick="history.go(0)">Annuler</button>
-                    </form>
+                                    @if($categories->count() == 0)
+                                        <option value="0" selected>No category</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div id="summernote"></div>
+                            <div class="form-group">
+                                <label>Tags</label>
+                                <input type="text" id="input-tags" name="tags">
+                            </div>
+                            <button type="submit" class="btn btn-default btn-md">@{{ submit }}</button>
+                            <button class="btn btn-lg" v-show="annuler" onClick="history.go(0)">Annuler</button>
+                        </form>
+                    @else
+                        <h3><div class="text-muted">Aucune catégorie exsitante, veuillez demander à l'admin de créer des catégories</div></h3>
+                    @endif
                 </div>
             </div>
         </div>

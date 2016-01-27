@@ -19,7 +19,9 @@ class AdminController extends Controller
 
     public function initiate()
     {
-        return view('admin.initiate')->with('users',[]);
+        $users = DB::table('allowed_users')->get();
+
+        return view('admin.initiate')->with('users', $users);
     }
 
     public function importCsv(Request $request)

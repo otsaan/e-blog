@@ -16,7 +16,15 @@
                 <hr>
                 <strong>Status</strong>
                 <br>
-                <p class="text-muted">{{ $user->role }}</p>
+
+                @if($user->role == 'eleve')
+                    <p class="text-muted">Elève</p>
+                @endif
+
+                @if($user->role == 'prof')
+                    <p class="text-muted">Prof</p>
+                @endif
+
                 @if($user->role == 'eleve' && !empty($user->level))
                     <hr>
                     <p><span class="label label-inverse">{{ $user->level }}</span></p>

@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>19</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ $blogViews }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Vues</p>
                             </div>
 
@@ -68,7 +68,7 @@
                             </div>
 
                             <div class="table-detail">
-                                <h4 class="m-t-0 m-b-5"><b>12</b></h4>
+                                <h4 class="m-t-0 m-b-5"><b>{{ $categoriesCount }}</b></h4>
                                 <p class="text-muted m-b-0 m-t-0">Catégories</p>
                             </div>
 

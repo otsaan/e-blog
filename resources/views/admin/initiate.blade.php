@@ -58,6 +58,49 @@
                         </div>
                     </div>
                 </div>
+
+                @if($users)
+                    <div class="card-box">
+                        <div class="row">
+                            <h3>Utilisateurs autorisés</h3>
+                            <hr>
+                            <div class="col-md-12">
+
+                                <table class="table table-striped m-0">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>EMAIL</th>
+                                        <th>CNE</th>
+                                        <th>CIN</th>
+                                        <th>TYPE</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    @foreach($users as $user)
+                                        @if($user->type == 'prof')
+                                            <tr class="warning">
+                                        @elseif($user->type == 'eleve')
+                                            <tr class="active">
+                                        @else
+                                            <tr>
+                                        @endif
+                                            <th scope="row">{{ $user->id }}</th>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->cne ? $user->cne : 'null' }}</td>
+                                            <td>{{ $user->cin ? $user->cin : 'null' }}</td>
+                                            <td>{{ $user->type }}</td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
             <div class="col-md-4">
                 <div class="card-box">
@@ -81,49 +124,9 @@
     4EF345,driss@gmail.com
     IF2432,hassan@yahoo.fr
 </pre>
-                 </div>
-            </div>
-        </div>
-
-        @if($users)
-            <div class="card-box">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="m-t-0 header-title"><b>Liste des étudiants chargés</b></h4>
-                        <hr>
-                            <form action=""></form>
-                        <hr>
-
-                        <table data-toggle="table"
-                               data-search="true"
-                               data-show-refresh="true"
-                               data-show-toggle="true"
-                               data-show-columns="true"
-                               data-sort-name="id"
-                               data-page-list="[5, 10, 20]"
-                               data-page-size="10"
-                               data-pagination="true" data-show-pagination-switch="true" class="table-bordered ">
-                            <thead>
-                            <tr>
-                                <th data-field="cne" data-sortable="true" data-formatter="dateFormatter">CNE</th>
-                                <th data-field="email" data-sortable="true" data-formatter="dateFormatter">EMAIL</th>
-                            </tr>
-                            </thead>
-
-
-                            <tbody>
-                            @foreach($users as $user)
-                                <tr>
-                                    <td>{{ $user['cne'] }}</td>
-                                    <td>{{ $user['email'] }}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
-        @endif
+        </div>
 
         <!-- end row -->
     </div> <!-- container -->
