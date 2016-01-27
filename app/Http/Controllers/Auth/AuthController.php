@@ -6,6 +6,7 @@ use App\Blog;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Validator;
@@ -82,6 +83,32 @@ class AuthController extends Controller
                 $request, $validator
             );
         }
+
+        // check if user is in allowed_users table
+        $email = $request->input('email');
+        $type = $request->input('type');
+
+        $query = DB::table('allowed_users')
+            ->where('email', $email);
+
+        if ($type == 'eleve') {
+            $cne = $request->input('cne');
+            $query = $query->where('cne', $cne);
+        } elseif ($type == 'prof') {
+            $cin = $request->input('cin');
+            $query = $query->where('cin', $cin);
+        }
+
+        if ($query->count() < 1) {
+            return redirect('/register')
+                ->with([
+                    'alert' => true,
+                    'hide_fields' => true,
+                    'class' => 'alert-danger',
+                    'message' => '<strong>Aucun utilisateur enregistré avec ces coordonnées</strong>... veuillez contactez l\'admin'
+                ]);
+        };
+
 
         $this->create($request->all());
 

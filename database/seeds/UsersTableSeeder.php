@@ -42,12 +42,12 @@ class UsersTableSeeder extends Seeder
         }
 
         DB::table('users')->insert([
-            'firstName' => $faker->firstName,
-            'lastName' => $faker->lastName,
+            'firstName' => 'admin',
+            'lastName' => 'admin',
             'username' => 'admin',
             'confirmed'=> 1,
             'cne'=> null,
-            'email'=> $faker->email,
+            'email'=> 'admin@admin.com',
             'role'=> 'admin',
             'password'=> bcrypt('admin'),
             'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
