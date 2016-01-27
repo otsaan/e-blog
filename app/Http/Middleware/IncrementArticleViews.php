@@ -2,11 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Blog;
+use App\Article;
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class Exists
+class IncrementArticleViews
 {
     /**
      * Handle an incoming request.
@@ -17,11 +16,13 @@ class Exists
      */
     public function handle($request, Closure $next)
     {
-        $username = explode('/', $request->path())[0];
+        $id = $request->segment(3);
 
-        // check that {username} exists
-        if ($username != 'admin' && Blog::where('username', '=', $username)->count() == 0) {
-            return redirect()->route('404');
+        $article = Article::find($id);
+
+        if ($article) {
+            $article->views++;
+            $article->save();
         }
 
         return $next($request);

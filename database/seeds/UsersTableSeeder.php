@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,10) as $index) {
+        foreach (range(1,8) as $index) {
             DB::table('users')->insert([
                 'firstName' => $faker->firstName,
                 'lastName' => $faker->lastName,
@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'photo' => 'noavatar.jpg',
                 'email'=> $faker->email,
                 'cne'=> strtoupper(str_random(10). $index),
-                'role'=> 'user',
+                'role'=> $faker->randomElement(['prof','eleve']),
                 'confirmed'=> 1,
                 'password'=> bcrypt('password'),
                 'level' => $faker->randomElement([
@@ -42,27 +42,28 @@ class UsersTableSeeder extends Seeder
         }
 
         DB::table('users')->insert([
-            'firstName' => $faker->firstName,
-            'lastName' => $faker->lastName,
-            'username' => 'admin',
+            'firstName' => 'eleve',
+            'lastName' => 'eleve',
+            'username' => 'eleve',
             'confirmed'=> 1,
-            'cne'=> null,
-            'email'=> $faker->email,
-            'role'=> 'admin',
-            'password'=> bcrypt('admin'),
+            'cne'=> 'd984932',
+            'email'=> 'eleve@eleve.com',
+            'role'=> 'eleve',
+            'password'=> bcrypt('password'),
             'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
         ]);
 
         DB::table('users')->insert([
-            'firstName' => 'simo',
-            'lastName' => 'l3aniba',
-            'username' => 'simo',
+            'firstName' => 'prof',
+            'lastName' => 'prof',
+            'username' => 'prof',
             'confirmed'=> 1,
-            'cne'=> 'ANASIMO',
-            'email'=> 'simo@simo.com',
-            'role'=> 'user',
+            'cin'=> '12121AS',
+            'email'=> 'prof@prof.com',
+            'role'=> 'prof',
             'password'=> bcrypt('password'),
             'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
         ]);
+
     }
 }

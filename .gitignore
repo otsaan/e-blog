@@ -11,3 +11,5 @@ Homestead.json
 .idea
 
 storage/
+
+public/uploads/

@@ -19,7 +19,7 @@ class AddForeignKeyToArticlesTable extends Migration
             $table->integer('blog_id')->unsigned();
             $table->foreign('blog_id')->references('id')->on('blogs');
 
-            $table->integer('category_id')->unsigned();
+            $table->integer('category_id')->nullable()->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }

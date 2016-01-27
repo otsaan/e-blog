@@ -34,7 +34,7 @@
                         </div>
                         <hr/>
 
-                        <p>{{ $message->content }}</p>
+                        <p>{!! $message->content !!}</p>
 
                     </div>
 

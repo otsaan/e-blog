@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => 'web'], function () {
 
-
     Route::get('/', 'HomeController@index');
 
+    Route::get('/artisan', 'HomeController@artisan');
 
     Route::get('/404', [
         'as' => '404',
@@ -16,7 +16,6 @@ Route::group(['middleware' => 'web'], function () {
     ]);
 
     //=============== API routes ===============
-    Route::get('/api/users', 'HomeController@getUsers');
     Route::get('/api/article/{id}', 'ArticleController@get');
 
     //=============== User routes ===============
@@ -42,6 +41,12 @@ Route::group(['middleware' => 'web'], function () {
         'middleware' => ['auth','admin'],
         'as' => 'activate',
         'uses'=>'BlogController@activate'
+    ]);
+
+    Route::post('/blogs/{id}/report', [
+        'middleware' => ['auth'],
+        'as' => 'report',
+        'uses'=>'BlogController@report'
     ]);
 
     Route::post('/like/{id}', [
@@ -73,6 +78,7 @@ Route::group([
 
     Route::post('/profile', [
         'middleware' => ['auth','username'],
+        'as' => 'post_profile',
         'uses'=>'UserController@update'
     ]);
 
@@ -100,7 +106,7 @@ Route::group([
 
     Route::get('/post/{id}', [
         'as' => 'article',
-        'middleware' => ['exists','active'],
+        'middleware' => ['exists','active','incrementArticleViews'],
         'uses'=>'ArticleController@show'
     ]);
 
@@ -145,10 +151,9 @@ Route::group([
         'uses'=>'BlogController@articles'
     ]);
 
-    Route::get('/statistics', [
-        'as' => 'statistics',
-        'middleware' => ['auth','username','admin'],
-        'uses'=>'AdminController@statistics'
+    Route::get('/blogs/{id}/articles/{articleId}', [
+        'as' => 'admin-article',
+        'uses'=>'ArticleController@showAdmin'
     ]);
     
     Route::get('/initiate', [

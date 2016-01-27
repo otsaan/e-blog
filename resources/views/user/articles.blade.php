@@ -58,104 +58,36 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4">
 
-                    <div class="card-box m-t-20">
-                        <h4 class="m-t-0 header-title"><b>Contact</b></h4>
-                        <div class="p-20">
-                        {{--<div class="bg-picture text-center">--}}
-                            {{--<div class="profile-info-name">--}}
-                                <img src="{{ asset('/images/users/avatar-1.jpg') }}" class="thumb-lg img-circle" alt="profile-image">
-                                <h4 class="m-b-5"><b>{{ $user->username }}</b></h4>
-                                <p class="text-muted"> {{ $user->firstName . ' ' . $user->lastName }}</p>
-                            {{--</div>--}}
-                        </div>
-                        <div class="p-20">
-                            <div class="about-info-p">
-                                <strong>Email</strong>
-                                <br>
-                                <p class="text-muted">{{ $user->email }}</p>
-                            </div>
-                            <div class="about-info-p m-b-0">
-                                <ul class="social-links list-inline m-0">
-                                    <li>
-                                        <a href="{{ $user->facebook ? $user->facebook  : '#' }}" class="tooltips" data-original-title="Facebook">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ $user->twitter ? $user->twitter  : '#' }}" class="tooltips" data-original-title="Twitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ $user->linkedin ? $user->linkdein  : '#' }}" class="tooltips" data-original-title="LinkedIn">
-                                            <i class="fa fa-linkedin"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="mailto:{{ $user->email }}" class="tooltips" data-original-title="Message">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-box">
-                        <h4 class="m-t-0 header-title"><b>Bio</b></h4>
-
-                        <div class="p-20">
-                            <p>{{ $user->about }}</p>
-                        </div>
-                    </div>
-
-                </div>
-
+                @include('partials.blog-sidebar')
 
                 <div class="col-lg-8 m-t-20">
-{{--                    @foreach($articles as $article)--}}
-                        {{--<div class="card-box m-b-10" style="padding: 5px 10px 5px 20px">--}}
-                            {{--<div class="table-box opport-box">--}}
-                                {{--<div>--}}
-                                    {{--<h3><b><a href="{{ route('article', [$user->username, $article->id]) }}">{{ $article->title }} </a></b> </h3>--}}
-                                    {{--<p class="text-right"><small><b>Catégorie: </b> <mark><a href="">{{ $article->category->name }}</a></mark></small></p>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-lg-12 m-t-20">--}}
-                            {{--<div class="panel panel-border panel-inverse">--}}
-                                {{--<div class="panel-heading">--}}
-                                    {{--<p class="panel-title"><b><a href="{{ route('article', [$user->username, $article->id]) }}">{{ $article->title }}</a></b> <small style="text-transform: lowercase"> dans <mark>{{ $article->category->name }}</mark></small></p>--}}
-                                {{--</div>--}}
-                                {{--<div class="panel-body">--}}
-                                    {{--<p>--}}
-                                        {{--{{ $article->description }}--}}
-                                    {{--</p>--}}
-                                {{--</div>--}}
-                                {{--<div class="panel-footer">--}}
-                                    {{--<p class="text-right" style="margin: 0"><small><b>Publié: </b>{{ $article->created_at->diffForHumans() }}</small></p>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
                     <div class="card-box">
-                        <h4 class="m-t-0 header-title"><b>Articles</b></h4>
                         <div class="p-20">
-                            <div class="timeline-2">
-
+                            @if(count($articles))
+                                <h3 class="m-t-0 header-title"><b>Articles</b></h3><hr>
                                 @foreach($articles as $article)
-                                    <div class="time-item">
-                                        <div class="item-info">
-                                            <div class="text-muted">{{ $article->created_at->diffForHumans() }}</div>
-                                            <h3><a href="{{ route('article', [$user->username, $article->id]) }}" class="text-info">{{ $article->title }}</a> <small>dans <a href="#" class="text-success">{{ $article->category->name }}</a></small</h3>
-                                            <p><em>"{{ $article->description }}"</em></p>
-                                        </div>
-                                    </div>
+
+                                    <h3>
+                                        <a href="{{ route('article', [$user->username, $article->id]) }}" class="text-inverse">{{ $article->title }}</a>
+                                        <small>dans <a href="#" class="text-default">{{ $article->category->name }}</a></small>
+                                    </h3>
+
+                                    @if(empty($article->description))
+                                        <div style="font-size:0.8em" class="text-muted">{{ $article->created_at->diffForHumans() }}</div>
+                                    @else
+                                        <blockquote><p style="font-size:0.85em" class="text-muted">{{ $article->description }}</p></blockquote>
+                                        <div style="font-size:0.8em" class="text-muted">{{ $article->created_at->diffForHumans() }}</div>
+                                    @endif
+
+
+                                    <br>
                                 @endforeach
 
-                            </div>
+                            @else
+                                <h3>Aucun article publié.</h3>
+                            @endif
+
                         </div>
                     </div>
                     {{--@endforeach--}}

@@ -18,10 +18,14 @@ class CreateUsersTable extends Migration
             $table->string('lastName')->nullable();
             $table->string('username');
             $table->string('cne')->unique()->nullable();
+            $table->string('cin')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('level')->nullable();
             $table->string('about')->nullable();
-            $table->string('photo')->nullable();
+            $table->string('photo')->default('noavatar.jpg');
+            $table->string('gender')->nullable();
+            $table->date('birthdate')->nullable();
+            $table->string('notify_email')->default(0);
 
             $table->string('role');
             $table->string('facebook')->nullable();

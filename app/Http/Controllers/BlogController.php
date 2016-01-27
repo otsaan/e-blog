@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Blog;
 use App\User;
+use App\Message;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,6 +17,9 @@ class BlogController extends Controller
 
     public function index($username)
     {
+        if ($username == 'admin') {
+            return redirect('/dashboard');
+        }
 
         $user = User::where('username','=',$username)->first();
         $articles = Article::where('user_id','=',$user->id)->paginate(8);
@@ -71,10 +75,55 @@ class BlogController extends Controller
         if($blog->status == 'active') {
             $blog->status = 'disabled';
             $blog->note = $request['note'];
+            $user = $blog->user;
+
+            Mail::send('email.deactivate', ['username'=> $blog->username, 'note' => $request->note],
+              function($message) use ($user) {
+                  $message->to($user['email'], $user['username'])
+                      ->subject('Désactivation du blog');
+            });
+
         } else {
             $blog->status = 'active';
         }
         $blog->save();
+
+        return redirect()->back();
+    }
+
+    public function report(Request $request, $id) {
+
+        $blog = Blog::find($id);
+
+        Message::create([
+            'content' => $request->note,
+            'to_user_id' => $blog->user->id,
+            'from_user_id' => $request->from,
+            'read' => false
+        ]);
+
+        $user = $blog->user;
+        $from = User::find($request->from);
+
+        if($user->notify_email) {
+            Mail::send('email.report', ['username'=> $blog->username, 'from' => $from, 'note' => $request->note],
+              function($message) use ($user) {
+                  $message->to($user['email'], $user['username'])
+                      ->subject('Blog signalé');
+            });
+        }
+
+        $url = route('blog', $blog->username);
+
+        $note = 'Blog '. $blog->id .' signalé: (<a href="'. $url .'">'. $url . '</a>)<br>';
+        $note .= $request->note;
+
+        Message::create([
+            'content' => $note,
+            'to_user_id' => User::where('role','=','admin')->first()->id,
+            'from_user_id' => $request->from,
+            'read' => false
+        ]);
 
         return redirect()->back();
     }

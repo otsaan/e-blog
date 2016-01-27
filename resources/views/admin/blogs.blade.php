@@ -37,7 +37,7 @@
                            data-show-columns="true"
                            data-sort-name="id"
                            data-page-list="[5, 10, 20]"
-                           data-page-size="5"
+                           data-page-size="20"
                            data-pagination="true" data-show-pagination-switch="true" class="table-bordered ">
                         <thead>
                         <tr>
@@ -61,11 +61,11 @@
                                 <td><a href="{{route('articles-blog', [auth()->user()->username, $blog->id]) }}"><i class="ti-arrow-circle-right"></i></a></td>
                                 <td>
                                     @if($blog->status != 'active')
-                                        <button data-toggle="modal" data-target="#activer{{$blog->id}}" class="btn btn-primary waves-effect waves-light">
+                                        <button data-toggle="modal" data-target="#activer{{$blog->id}}" class="btn btn-sm btn-primary waves-effect waves-light">
                                             Activer
                                         </button>
                                     @else
-                                        <button data-toggle="modal" data-target="#modal{{$blog->id}}" class="btn btn-danger waves-effect waves-light">
+                                        <button data-toggle="modal" data-target="#modal{{$blog->id}}" class="btn btn-sm btn-danger waves-effect waves-light">
                                             Désactiver
                                         </button>
                                     @endif
