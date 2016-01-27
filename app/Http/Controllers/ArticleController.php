@@ -39,7 +39,7 @@ class ArticleController extends Controller
             'views' => 0,
             'user_id' => auth()->user()->id,
             'blog_id' => 1,
-            'category_id' => $request['category'],
+            'category_id' => $request['category'] ? $request['category'] : 0,
         ]);
 
         $article->save();

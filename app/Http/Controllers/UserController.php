@@ -94,6 +94,7 @@ class UserController extends Controller
 
         $user = User::where('confirmation_code', $confirmationCode)->first();
 
+
         if (!$user) {
             return redirect('/register')
                 ->with([

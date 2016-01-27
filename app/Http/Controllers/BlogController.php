@@ -17,7 +17,7 @@ class BlogController extends Controller
 
     public function index($username)
     {
-        if ($username = 'admin') {
+        if ($username == 'admin') {
             return redirect('/dashboard');
         }
 

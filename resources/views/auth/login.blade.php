@@ -42,7 +42,7 @@
                 {!! csrf_field() !!}
 
                 @if (session('alert'))
-                    <div class="alert {{ session('class') }}">
+                    <div class="alert alert-{{ session('class') }}">
                         <a class="close" data-dismiss="alert" href="#">×</a>
                         <p>{!! session('message') !!}</p>
                     </div>

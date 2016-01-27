@@ -18,6 +18,11 @@ class Article extends Model
         'user_id', 'blog_id', 'category_id',
     ];
 
+    public function setCategoryIdAttribute($value)
+    {
+        $this->attributes['category_id'] = $value ?: null;
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');

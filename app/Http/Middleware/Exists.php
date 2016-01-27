@@ -18,6 +18,7 @@ class Exists
     public function handle($request, Closure $next)
     {
         $username = explode('/', $request->path())[0];
+
         // check that {username} exists
         if ($username != 'admin' && Blog::where('username', '=', $username)->count() == 0) {
             return redirect()->route('404');

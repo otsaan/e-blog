@@ -63,26 +63,31 @@
 
                 <div class="col-lg-8 m-t-20">
                     <div class="card-box">
-                        <h4 class="m-t-0 header-title"><b>Articles</b></h4>
                         <div class="p-20">
                             @if(count($articles))
-                                <div class="timeline-2">
-                                    @foreach($articles as $article)
-                                        <div class="time-item">
-                                            <div class="item-info">
-                                                <div class="text-muted">{{ $article->created_at->diffForHumans() }}</div>
-                                                <h3><a href="{{ route('article', [$user->username, $article->id]) }}" class="text-info">{{ $article->title }}</a> <small>dans <a href="#" class="text-success">{{ $article->category->name }}</a></small</h3>
-                                                <p><em>"{{ $article->description }}"</em></p>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
+                                <h3 class="m-t-0 header-title"><b>Articles</b></h3><hr>
+                                @foreach($articles as $article)
+
+                                    <h3>
+                                        <a href="{{ route('article', [$user->username, $article->id]) }}" class="text-inverse">{{ $article->title }}</a>
+                                        <small>dans <a href="#" class="text-default">{{ $article->category->name }}</a></small>
+                                    </h3>
+
+                                    @if(empty($article->description))
+                                        <div style="font-size:0.8em" class="text-muted">{{ $article->created_at->diffForHumans() }}</div>
+                                    @else
+                                        <blockquote><p style="font-size:0.85em" class="text-muted">{{ $article->description }}</p></blockquote>
+                                        <div style="font-size:0.8em" class="text-muted">{{ $article->created_at->diffForHumans() }}</div>
+                                    @endif
+
+
+                                    <br>
+                                @endforeach
+
                             @else
-                                <div class="alert alert-info">
-                                    <h1>Pas d'articles!</h1>
-                                    <h3>Cet utilisateur n'a pas encore publié un article.</h3>
-                                </div>
+                                <h3>Aucun article publié.</h3>
                             @endif
+
                         </div>
                     </div>
                     {{--@endforeach--}}

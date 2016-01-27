@@ -121,6 +121,10 @@
                                 @foreach($categories as $categorie)
                                     <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
                                 @endforeach
+
+                                @if($categories->count() == 0)
+                                    <option value="0" selected>No category</option>
+                                @endif
                             </select>
                         </div>
                         <div id="summernote"></div>

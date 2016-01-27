@@ -19,7 +19,7 @@ class Me
 
         // check that {username} belongs to the logged in user
         if ($username != auth()->user()->username) {
-            return view('errors.404');
+            return response('Not Found', 404);
         }
 
         return $next($request);

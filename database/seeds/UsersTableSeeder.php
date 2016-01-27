@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1,7) as $index) {
+        foreach (range(1,8) as $index) {
             DB::table('users')->insert([
                 'firstName' => $faker->firstName,
                 'lastName' => $faker->lastName,
@@ -40,18 +40,6 @@ class UsersTableSeeder extends Seeder
                 'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
             ]);
         }
-
-        DB::table('users')->insert([
-            'firstName' => 'admin',
-            'lastName' => 'admin',
-            'username' => 'admin',
-            'confirmed'=> 1,
-            'cne'=> null,
-            'email'=> 'admin@admin.com',
-            'role'=> 'admin',
-            'password'=> bcrypt('admin'),
-            'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
-        ]);
 
         DB::table('users')->insert([
             'firstName' => 'eleve',

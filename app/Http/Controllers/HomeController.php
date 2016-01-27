@@ -16,6 +16,7 @@ class HomeController extends Controller
     {
         return view('home')
             ->with(['users'=> User::where('role','!=','admin')
+                ->where('confirmed', 1)
                 ->get()
                 ->take(20)
                 ->map(function($u) {
@@ -48,7 +49,6 @@ class HomeController extends Controller
 
     public function artisan(Request $request)
     {
-
         $command = $request->input('command');
 
         if ($command == 'migrate') {
@@ -57,6 +57,8 @@ class HomeController extends Controller
             Artisan::call('db:seed');
         } elseif ($command == 'migrate:refresh') {
             Artisan::call('migrate:refresh');
+        } elseif ($command == 'seed:admin') {
+            Artisan::call('db:seed', array('--class' => 'AdminSeeder'));
         } else {
             return view('errors.404');
         }

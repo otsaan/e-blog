@@ -18,6 +18,7 @@ class ArticlesTableSeeder extends Seeder
                 'title' => $faker->sentence(3),
                 'content' => $faker->text,
                 'views' => $faker->numberBetween(0,100),
+                'description' => $faker->paragraph,
                 'user_id' => $faker->numberBetween(1,10),
                 'blog_id' => $faker->numberBetween(1,10),
                 'category_id' => $faker->numberBetween(1,10),
@@ -31,6 +32,7 @@ class ArticlesTableSeeder extends Seeder
             DB::table('articles')->insert([
                 'title' => $faker->sentence(3),
                 'content' => $faker->text,
+                'description' => $faker->paragraph,
                 'views' => $faker->numberBetween(0,100),
                 'user_id' => 9,
                 'blog_id' => 9,
@@ -43,6 +45,7 @@ class ArticlesTableSeeder extends Seeder
             DB::table('articles')->insert([
                 'title' => $faker->sentence(3),
                 'content' => $faker->text,
+                'description' => $faker->paragraph,
                 'views' => $faker->numberBetween(0,100),
                 'user_id' => 10,
                 'blog_id' => 10,
