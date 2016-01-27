@@ -18,12 +18,13 @@ class HomeController extends Controller
             ->with(['users'=> User::where('role','!=','admin')
                 ->where('confirmed', 1)
                 ->get()
-                ->take(20)
                 ->map(function($u) {
                     $u->fullName = $u->firstName . ' ' . $u->lastName;
                     $u->blogUrl = url('/') . '/' . $u->username;
+                    $u->articlesCount = $u->articles()->count();
+
                     return $u;
-                })
+                })->sortByDesc('articlesCount')->take(9)
             ]);
     }
 
