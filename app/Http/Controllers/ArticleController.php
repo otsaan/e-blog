@@ -138,4 +138,16 @@ class ArticleController extends Controller
             $article->unlike();
         }
     }
+
+    public function showAdmin($username, $id, $articleId)
+    {
+        $article = Article::find($articleId);
+
+        $tags = $article->tags;
+
+        return view('admin.single')->with([
+            'article' => $article,
+            'tags' => $tags
+        ]);
+    }
 }
