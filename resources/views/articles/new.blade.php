@@ -28,9 +28,17 @@
 
                 <div class="portlet"><!-- /primary heading -->
                     <div class="portlet-heading">
-                        <h3 class="portlet-title text-dark text-uppercase">
-                            Articles récents
-                        </h3>
+                        <h3 class="portlet-title text-dark text-uppercase">Articles récents</h3>
+                        <br>
+
+                        @if(session('alert') && session('update'))
+                            <hr>
+                            <div class="alert alert-{{ session('class') }}">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <p>{!! session('message') !!}</p>
+                            </div>
+                        @endif
+
                         <div class="portlet-widgets">
                             <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
                             <span class="divider"></span>
@@ -85,6 +93,14 @@
                 <div class="card-box">
                     <form id="form" method="POST" action="@{{ action }}" @submit="onSubmit">
 
+                        @if(session('alert') && session('create'))
+                            <hr>
+                            <div class="alert alert-{{ session('class') }}">
+                                <a class="close" data-dismiss="alert" href="#">×</a>
+                                <p>{!! session('message') !!}</p>
+                            </div>
+                        @endif
+
                         <input type="hidden" name="id" value="@{{ article.id }}" />
                         <h4 class="m-b-30 m-t-0 header-title"><b>@{{ title }}</b></h4>
 
@@ -112,7 +128,7 @@
                             <label>Tags</label>
                             <input type="text" id="input-tags" name="tags">
                         </div>
-                        <button type="submit" class="btn btn-default btn-lg">@{{ submit }}</button>
+                        <button type="submit" class="btn btn-default btn-md">@{{ submit }}</button>
                         <button class="btn btn-lg" v-show="annuler" onClick="history.go(0)">Annuler</button>
                     </form>
                 </div>
