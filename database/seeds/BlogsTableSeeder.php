@@ -16,8 +16,8 @@ class BlogsTableSeeder extends Seeder
         $faker = Faker::create();
         foreach (range(1,10) as $index) {
             DB::table('blogs')->insert([
-                'username' => User::find($index)->username,
-                'user_id' => $index,
+                'username' => User::find($index+1)->username,
+                'user_id' => $index+1,
                 'status' => 'active',
                 'views' => $faker->numberBetween(0,100),
                 'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')

@@ -17,9 +17,9 @@ class AdminSeeder extends Seeder
             'lastName' => 'admin',
             'username' => 'admin',
             'confirmed'=> 1,
-            'email'=> 'admin@admin.com',
+            'email'=> 'hbadir@gmail.com',
             'role'=> 'admin',
-            'password'=> bcrypt('admin'),
+            'password'=> bcrypt('eblogadmin2016'),
             'created_at' => $faker->date($format = 'Y-m-d', $max = 'now')
         ]);
     }
