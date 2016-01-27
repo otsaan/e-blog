@@ -8,6 +8,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/', 'HomeController@index');
 
+    Route::get('/artisan', 'HomeController@artisan');
+
     Route::get('/404', [
         'as' => '404',
         'uses' => 'HomeController@notFound'

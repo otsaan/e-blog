@@ -6,6 +6,7 @@ use App\Blog;
 use App\Http\Requests;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -43,5 +44,23 @@ class HomeController extends Controller
     public function dashboard()
     {
         return redirect()->route('dashboard', auth()->user()->username);
+    }
+
+    public function artisan(Request $request)
+    {
+
+        $command = $request->input('command');
+
+        if ($command == 'migrate') {
+            Artisan::call('migrate');
+        } elseif ($command == 'db:seed') {
+            Artisan::call('db:seed');
+        } elseif ($command == 'migrate:refresh') {
+            Artisan::call('migrate:refresh');
+        } else {
+            return view('errors.404');
+        }
+
+        return 'php artisan '. $command;
     }
 }
