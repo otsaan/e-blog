@@ -59,12 +59,29 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="card-box">
+
+                    <h3>Exemple de fichiers CSV</h3>
+                    <hr>
+                    <p>Elève</p>
+
+<pre style="font-size:0.8em">
+    cne,email
+    123245,ahmed@gmail.com
+    432345,yassine@gmail.com
+    1232432,nawfal@yahoo.fr
+</pre>
+
+                    <hr>
+                    <p>Prof</p>
+<pre style="font-size:0.8em">
+    cin,email
+    AB221,mohammed@gmail.com
+    4EF345,driss@gmail.com
+    IF2432,hassan@yahoo.fr
+</pre>
+                 </div>
             </div>
         </div>
 
