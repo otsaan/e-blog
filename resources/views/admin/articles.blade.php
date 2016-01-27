@@ -29,8 +29,7 @@
                         <div class="time-item">
                             <div class="item-info">
                                 <div class="text-muted">{{ $article->created_at->diffForHumans() }}</div>
-                                <h3><a href="{{ route('article', [$article->blog['username'], $article->id]) }}" class="text-info">{{ $article->title }}</a> <small>dans <a href="#" class="text-success">{{ $article->category->name }}</a></small>
-                                    {{--<a href="#" @click="delete({{ $article->id }})"><i class="ti-trash"></i></a>--}}
+                                <h3><a href="{{ route('admin-article', [$article->blog['username'], $article->blog['id'], $article->id]) }}" class="text-info">{{ $article->title }}</a> <small>dans <a href="#" class="text-success">{{ $article->category->name }}</a></small>
                                     <a href="#" data-toggle="modal" data-target="#modal{{$article->id}}"><i class="ti-trash"></i></a>
                                 </h3>
                                 <p><em>"{{ $article->description }}"</em></p>
