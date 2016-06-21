@@ -3,8 +3,8 @@ School blogging platform.
 
 ## Demo :
 http://eblog.ensa-learning.com/
-hbadir@gmail.com 
-eblogadmin2016
+
+hbadir@gmail.com:eblogadmin2016
 
 ## Pre-requisits
 - Git
